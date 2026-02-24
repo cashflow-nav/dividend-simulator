@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy - DCA & Dividend Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; color: #1e293b; line-height: 1.6; }
+        .glass-card { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; }
+        h2 { border-left: 4px solid #3b82f6; padding-left: 1rem; margin-bottom: 2rem; font-weight: 900; color: #0f172a; font-size: 1.8rem; }
+        h3 { font-size: 1.3rem; font-weight: 900; color: #1e293b; margin-bottom: 0.75rem; display: flex; align-items: center; }
+        h3::before { content: "•"; color: #3b82f6; margin-right: 0.5rem; font-size: 1.5rem; }
+        .lang-section { margin-bottom: 4rem; }
+        .en-text { color: #64748b; font-size: 0.95rem; margin-top: 1rem; border-top: 1px dashed #e2e8f0; pt-4; }
+        article { margin-bottom: 2.5rem; }
+        p { margin-bottom: 1rem; }
+    </style>
+</head>
+<body class="p-6 md:p-16">
+    <div class="max-w-4xl mx-auto">
+        <a href="index.html" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-bold mb-8 transition-colors">
+            ← Back to Simulator / 回到模擬器
+        </a>
+
+        <div class="glass-card p-8 md:p-12 shadow-xl">
+            <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-10 italic uppercase tracking-tighter">
+                Stock <span class="text-blue-600">Academy</span>
+                <span class="block text-sm not-italic font-medium text-slate-400 mt-2">存股教室</span>
+            </h1>
+
+            <section class="lang-section">
+                <h2>1. The Magic of Compounding (第一課：複利的魔力與時間的關係)</h2>
+                <p class="font-bold">在投資的前 5 到 10 年，資產成長主要來自於您的本金投入。但隨著時間推移，利息產生的利息會呈現指數級增長。透過圖表，您可以觀察到長年投資後資產曲線的斜率會明顯變陡，這就是複利生效的「曲棍球桿效應」。</p>
+                <p class="en-text">In the first 5 to 10 years of investing, asset growth primarily comes from your principal. However, over time, the interest earned on interest grows exponentially. Through charts, you can observe the asset curve becoming significantly steeper—the "hockey stick effect" of compounding.</p>
+            </section>
+
+            <section class="lang-section">
+                <h2>2. How DCA Averages Costs (第二課：定期定額 (DCA) 如何平均成本？)</h2>
+                <p class="font-bold">定期定額策略透過固定時間投入固定金額，在股市高位時買入較少股數，低位時買入較多股數。長期下來，持有成本會趨於平均。模擬假設投資者能克服心理波動，持之以恆地參與市場，這是達成模擬目標的核心前提。</p>
+                <p class="en-text">Dollar-Cost Averaging (DCA) involves investing a fixed amount at regular intervals, buying fewer shares when prices are high and more when prices are low. Over the long term, your holding cost tends to average out. This simulation assumes investors can overcome psychological volatility and participate consistently.</p>
+            </section>
+
+            <section class="lang-section">
+                <h2>3. Payout Frequency Patterns (第三課：理解配息頻率對現金流規律的影響)</h2>
+                <p class="font-bold">配息頻率（月配、季配、年配）主要影響的是現金流的「領取感」與「累積節奏」。在本模擬器的定期定額條件下，您可能會發現年配息標的的總資產成長略高，這是因為模型假設利息在期末以完整本金規模進行結算；而月配息標則提供了更即時的複利滾動與生活加薪感。投資者應根據需求選擇：追求穩定且頻繁的現金回流可關注月配商品；追求單次大規模結算則可參考年配標的。</p>
+                <p class="en-text">Payout frequency (Monthly, Quarterly, Annual) primarily affects the "reward sensation" and accumulation rhythm of your cash flow. Under DCA conditions in this simulator, you might notice slightly higher growth in annual payout assets because the model assumes interest is settled at the period-end with the full principal scale. Monthly payouts provide more immediate compounding and a sense of a "monthly raise." Investors should choose based on needs: focus on monthly products for stable, frequent cash flow; look at annual payouts for large, single settlements.</p>
+            </section>
+
+            <section class="lang-section">
+                <h2>4. The Boring Middle (第四課：克服「無感中期」的心理關卡)</h2>
+                <p class="font-bold">在 20 年的存股計畫中，最難熬的往往是第 7 到 12 年。此時本金累積到一定程度，但複利增長還未產生爆炸性視覺效果。理解這個「成長高原期」是避免中途放棄、確保計畫成功的關鍵。</p>
+                <p class="en-text">The most difficult part of a 20-year DCA plan isn't the start or the end—it's the middle. Years 7 through 12 often feel slow because your contributions are large relative to your current gains. Understanding this plateau is key to not quitting before the compounding curve takes off.</p>
+            </section>
+
+            <section class="lang-section">
+                <h2>5. Risk and Reinvestment (第五課：風險管理與再投資的紀律)</h2>
+                <p class="font-bold">配息並非保證。一個穩健的策略應分散在不同頻率的標的。請記住，本工具顯示的「總資產」是建立在「100% 股息再投資」的前提下；一旦您開始將股息領出消費，複利的斜率將會顯著降低。</p>
+                <p class="en-text">Dividends are not guaranteed. A robust strategy involves diversifying across different frequencies to ensure a smooth cash flow. Always remember that the "Total Asset" shown in this tool assumes 100% dividend reinvestment—the moment you start spending those dividends, the compounding slope will decrease.</p>
+            </section>
+
+            <footer class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Financial Education Series</p>
+                <p class="text-xs text-slate-400 italic">© CASHFLOW NAVIGATION LAB</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

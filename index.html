@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>DCA & Dividend Simulator - 定期定額存股模擬器</title>
+    <meta name="description" content="Professional Dividend & Compound Interest Simulator. Support Monthly, Quarterly, and Annual payouts. 最直觀的定期定額存股試算工具，幫助您規劃長期資產與現金流地圖。">
+    <meta name="keywords" content="Dividend, DCA, Compound Interest, 複利, 存股, 定期定額, 理財工具, 退休規劃, Dividend Calculator">
+    
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DCA & Dividend Simulator">
+    <meta property="og:description" content="DCA tool for long-term investors. 為長期投資者打造的複利現金流導航工具。">
+    <meta property="og:image" content="og-image.svg">
+    
+    <link rel="alternate" hreflang="zh-Hant" href="https://your-future-domain.com/?lang=zh" />
+    <link rel="alternate" hreflang="en" href="https://your-future-domain.com/?lang=en" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; color: #1e293b; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        .glass-card { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .input-group { display: flex; align-items: center; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 0.75rem; padding: 0.5rem 0.75rem; transition: all 0.2s; }
+        .input-group:focus-within { border-color: #3b82f6; ring: 3px; ring-color: #dbeafe; background: white; }
+        .input-label { font-size: 0.75rem; font-weight: 900; color: #64748b; min-width: 85px; }
+        input { background: transparent; border: none; outline: none; font-weight: 900; text-align: right; width: 100%; color: #1e293b; font-size: 1.1rem; }
+        .nav-link { font-size: 0.75rem; font-weight: 900; color: #64748b; letter-spacing: 0.1em; transition: color 0.2s; }
+        .nav-link:hover { color: #3b82f6; }
+        .edu-content h3 { font-weight: 900; color: #0f172a; font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem; border-left: 4px solid #3b82f6; padding-left: 1rem; }
+        .edu-content p { color: #475569; line-height: 1.8; margin-bottom: 1.5rem; }
+        .dynamic-text { 
+            word-break: break-all; 
+            font-size: clamp(1rem, 5vw, 1.875rem); 
+            line-height: 1.1;
+        }
+        /* Cookie Banner 樣式 */
+        #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 800px; z-index: 1000; display: none; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div id="cookie-banner" class="glass-card p-6 border-t-4 border-t-blue-600 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xl">
+        <p class="text-[10px] md:text-xs font-bold text-slate-600 i18n" data-key="cookie_text"></p>
+        <button onclick="acceptCookies()" class="bg-blue-600 text-white px-8 py-2 rounded-full text-[10px] font-black uppercase whitespace-nowrap hover:bg-blue-700 transition-colors i18n" data-key="cookie_btn"></button>
+    </div>
+
+    <div class="max-w-7xl mx-auto">
+        <header class="mb-10 flex flex-col lg:flex-row justify-between items-center gap-6 border-b border-slate-200 pb-6">
+    <div class="flex-shrink-0 text-center lg:text-left">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-tighter text-slate-900 whitespace-nowrap">
+            DCA & <span class="text-blue-600">Dividend</span> 
+            <span class="text-slate-400 not-italic ml-1 text-xl md:text-2xl font-light">Simulator</span>
+        </h1>
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1">Cashflow Navigation Lab</p>
+    </div>
+
+    <nav class="flex flex-col md:flex-row items-center justify-end w-full gap-4">
+        <div class="flex flex-wrap justify-center md:justify-end items-center gap-2 md:gap-4">
+            <a href="about.html" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all backdrop-blur-md border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_about">關於我們</a>
+            <a href="#tool" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all backdrop-blur-md border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_tool">模擬工具</a>
+            <a href="#logic" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all backdrop-blur-md border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_logic">計算邏輯</a>
+            <a href="academy.html" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all backdrop-blur-md border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_edu">存股教室</a>
+        </div>
+        <button onclick="toggleLang()" class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black hover:bg-blue-600 transition-all uppercase tracking-tighter whitespace-nowrap">
+            中文 / EN
+        </button>
+    </nav>
+</header>
+
+        <section class="mb-8">
+            <div class="glass-card p-6 border-l-4 border-l-blue-600">
+                <h2 class="text-lg font-black text-slate-900 mb-2 i18n" data-key="intro_title"></h2>
+                <p class="text-sm text-slate-500 font-medium leading-relaxed i18n" data-key="intro_desc"></p>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 text-center md:text-left">
+            <div class="bg-blue-600 p-6 rounded-[2rem] text-white shadow-xl">
+                <p class="text-[10px] font-bold text-blue-200 uppercase tracking-widest mb-1 i18n" data-key="stat_monthly_invest"></p>
+                <p id="totalMonthlyBudget" class="font-black dynamic-text">$ 0</p>
+            </div>
+            <div class="bg-slate-900 p-6 rounded-[2rem] text-white shadow-xl">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1 i18n" data-key="stat_total_asset"></p>
+                <p id="totalAsset" class="font-black dynamic-text">$ 0</p>
+            </div>
+            <div class="bg-white p-6 rounded-[2rem] border border-slate-200">
+                <p class="text-[10px] font-bold text-blue-500 uppercase tracking-widest mb-1 i18n" data-key="stat_total_interest"></p>
+                <p id="totalInterest" class="font-black dynamic-text">$ 0</p>
+            </div>
+            <div class="bg-emerald-500 p-6 rounded-[2rem] text-white shadow-lg relative overflow-hidden">
+                <p class="text-[10px] font-bold text-emerald-100 uppercase tracking-widest mb-1 i18n" data-key="stat_avg_monthly"></p>
+                <p id="avgMonthlyIncome" class="font-black dynamic-text">$ 0</p>
+                <p class="text-[10px] font-bold text-emerald-900 mt-1 opacity-60"><span class="i18n" data-key="stat_annual_ref"></span> <span id="totalAnnualIncome">$ 0</span></p>
+            </div>
+        </section>
+
+        <div id="tool" class="grid grid-cols-1 lg:grid-cols-12 gap-8 scroll-mt-24">
+            <main class="lg:col-span-8 space-y-6">
+                <div class="glass-card p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex flex-col">
+                        <span class="font-black text-slate-700 text-xs uppercase tracking-widest i18n" data-key="slider_title"></span>
+                        <span id="sliderSub" class="text-[10px] font-bold text-slate-400"></span>
+                    </div>
+                    <div class="flex items-center gap-6 flex-grow md:max-w-md">
+                        <input type="range" id="years" min="1" max="40" value="1" class="flex-grow h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600" oninput="document.getElementById('yVal').innerText=this.value; run()">
+                        <span class="text-blue-600 font-black text-3xl flex items-baseline"><span id="yVal">1</span><small class="text-xs ml-1 font-bold text-slate-400 i18n" data-key="unit_y">Y</small></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="glass-card p-6 border-t-4 border-t-blue-500">
+                        <h3 class="font-black text-slate-800 mb-6 italic text-sm i18n" data-key="card_m"></h3>
+                        <div class="space-y-4">
+                           <div class="input-group"><span class="input-label i18n" data-key="label_current"></span><input type="number" id="m_current" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                           <div class="input-group"><span class="input-label i18n" data-key="label_invest"></span><input type="number" id="m_amount" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                           <div class="input-group"><span class="input-label i18n" data-key="label_rate"></span><input type="number" id="m_rate" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 border-t-4 border-t-indigo-500">
+                        <h3 class="font-black text-slate-800 mb-6 italic text-sm i18n" data-key="card_q"></h3>
+                        <div class="space-y-4">
+                            <div class="input-group"><span class="input-label i18n" data-key="label_current"></span><input type="number" id="q_current" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                            <div class="input-group"><span class="input-label i18n" data-key="label_invest"></span><input type="number" id="q_amount" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                            <div class="input-group"><span class="input-label i18n" data-key="label_rate"></span><input type="number" id="q_rate" value="0" min="0" step="0.1" oninput="run()" onfocus="this.select()"></div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 border-t-4 border-t-purple-500">
+                        <h3 class="font-black text-slate-800 mb-6 italic text-sm i18n" data-key="card_s"></h3>
+                        <div class="space-y-4">
+                           <div class="input-group"><span class="input-label i18n" data-key="label_current"></span><input type="number" id="s_current" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                           <div class="input-group"><span class="input-label i18n" data-key="label_invest"></span><input type="number" id="s_amount" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                           <div class="input-group"><span class="input-label i18n" data-key="label_rate"></span><input type="number" id="s_rate" value="0" min="0" step="0.1" oninput="run()" onfocus="this.select()"></div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 border-t-4 border-t-slate-700">
+                        <h3 class="font-black text-slate-800 mb-6 italic text-sm i18n" data-key="card_a"></h3>
+                        <div class="space-y-4">
+                            <div class="input-group"><span class="input-label i18n" data-key="label_current"></span><input type="number" id="a_current" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                            <div class="input-group"><span class="input-label i18n" data-key="label_invest"></span><input type="number" id="a_amount" value="0" min="0" oninput="run()" onfocus="this.select()"></div>
+                            <div class="input-group"><span class="input-label i18n" data-key="label_rate"></span><input type="number" id="a_rate" value="0" min="0" step="0.1" oninput="run()" onfocus="this.select()"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 bg-white h-[450px]">
+                    <canvas id="mainChart"></canvas>
+                </div>
+            </main>
+
+            <aside class="lg:col-span-4">
+                <div class="glass-card overflow-hidden sticky top-8 shadow-2xl">
+                    <div class="p-5 bg-slate-900 text-white font-black text-xs tracking-widest text-center uppercase i18n" data-key="aside_title"></div>
+                    <div class="overflow-x-auto max-h-[800px]">
+                        <table class="w-full text-[12px] text-left">
+                            <thead class="bg-slate-50 border-b text-slate-400 font-black sticky top-0 z-10">
+                                <tr>
+                                    <th class="px-4 py-4 i18n" data-key="th_y"></th>
+                                    <th class="px-4 py-4 text-right i18n" data-key="th_a"></th>
+                                    <th class="px-4 py-4 text-right text-emerald-600 i18n" data-key="th_m"></th>
+                                    <th class="px-4 py-4 text-right text-slate-300 italic i18n" data-key="th_ref"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody" class="divide-y divide-slate-100 font-bold text-slate-600"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <section id="logic" class="mt-24 scroll-mt-24">
+            <div class="glass-card p-8 md:p-12 bg-white">
+                <h2 class="text-3xl font-black text-slate-900 mb-8 border-l-8 border-blue-600 pl-6 italic uppercase i18n" data-key="logic_title"></h2>
+                <div id="logicGrid" class="grid grid-cols-1 md:grid-cols-2 gap-12 text-slate-600 leading-relaxed text-sm md:text-base"></div>
+            </div>
+        </section>
+
+        <section class="mt-24 border-t border-slate-200 pt-16">
+            <div class="bg-slate-900 p-8 md:p-12 rounded-[2rem] text-white flex flex-col md:flex-row justify-between items-center gap-8">
+                <div>
+                    <h3 class="text-2xl font-black italic mb-2 i18n" data-key="contact_title"></h3>
+                    <p class="text-slate-400 text-sm i18n" data-key="contact_desc"></p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Official Support</p>
+                    <a href="mailto:contact@yourdomain.com" class="text-xl md:text-2xl font-black hover:text-blue-400 transition-colors">contact@yourdomain.com</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-24 border-t border-slate-200 py-16 text-center">
+            <p class="text-xs font-black text-slate-400 uppercase tracking-[0.5em] mb-4">Cashflow Navigation Lab</p>
+            
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+                <a href="about.html" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="about_link"></a>
+                <a href="privacy.html" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="privacy_link"></a>
+                <a href="terms.html" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="terms_link"></a>
+            </div>
+
+            <p class="text-[10px] text-slate-400 max-w-2xl mx-auto px-4 italic leading-loose i18n" data-key="disclaimer"></p>
+        </footer>
+    </div>
+
+   <script>
+        let currentLang = 'en';
+        const langData = {
+            zh: {
+                nav_about: "關於我們", nav_tool: "模擬工具", nav_logic: "計算邏輯", nav_edu: "存股教室",
+                intro_title: "定期定額存股模擬器",
+                intro_desc: "您可以模擬在不同配息頻率標的上，定期定額投入不同金額，以了解可能的結果，並擬定未來策略。",
+                stat_monthly_invest: "每月合計投入", stat_total_asset: "計畫終點總價值", stat_total_interest: "累計總獲息", stat_avg_monthly: "預估平均月領", stat_annual_ref: "預估年息:",
+                slider_title: "投資計畫總年限", slider_sub: "Investment Horizon", unit_y: "年",
+                card_m: "月配息標的 (12次/年)", card_q: "季配息標的 (4次/年)", card_s: "半年配標的 (2次/年)", card_a: "年配息標的 (1次/年)",
+                label_current: "現有持股金額", label_invest: "每月投入", label_rate: "年報酬率%",
+                aside_title: "年度成長明細", th_y: "年份", th_a: "總資產", th_m: "平均月領", th_ref: "年息參考",
+                chart_interest: "複利獲息", chart_invested: "本金投入", chart_total: "總價值",
+                label_year: "第", label_year_suffix: " 年",
+                about_link: "關於我們 (About)",
+                privacy_link: "隱私權政策 (Privacy)",
+                terms_link: "使用條款 (Terms)",
+                disclaimer: "免責聲明：本模擬結果僅供參考，不代表未來獲利保證。投資必有風險，請諮詢專業顧問。 © 2026 CASHFLOW NAVIGATION LAB.",
+                contact_title: "聯繫與支援",
+                contact_desc: "若有任何問題、建議或錯誤回報，歡迎透過官方郵件聯繫。",
+                cookie_text: "本網站使用 Cookie 以提升用戶體驗與分析流量。點擊「同意」代表您接受我們的隱私權條款。",
+                cookie_btn: "同意並關閉",
+                logic_title: "核心演算詳解",
+                logic_html: `
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">1. 資金參與配息原則 (DCA Counting)</p>
+                        <p>本模擬器採「當期投入、當期參與」邏輯。即您設定的每月投入資金會視為在除權息日前投入，完整併入資產基準進行計算。這最符合多數 **配息金融商品** 「除息日前買入即可領息」的現況。</p>
+                        <p class="font-bold text-slate-800 text-lg">2. 週期性複利結算 (Compound Frequency)</p>
+                        <p>利息並非每年結算，而是依標的頻率精確至月份。舉例來說，若每月投入 $3,000 到年殖利率 5% 的月配息標的 (月利率約 0.4167%)：</p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 font-mono text-sm text-slate-500">
+                            M1: $3,000 + 利息 $12.5 = $3,012.5<br>
+                            M2: $6,012.5 + 利息 $25 = $6,037.5<br>
+                            M3: $9,037.5 + 利息 $37.6 = $9,075.1<br>
+                            ...
+                        </div>
+                        <p>結算後的利息會立即併入下月本金，發揮複利最大威力。</p>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">3. 預期殖利率與現金流換算</p>
+                        <p>本工具將您輸入的「年報酬率%」定義為 **預期年化殖利率**，並假設所有配息皆 **自動滾入再投資**。而顯示的「平均月領」數據，是取年度末總資產乘以殖利率後平攤至 12 個月。這能讓您清楚看到，隨著資產規模擴大，您未來每個月能從市場領回多少現金流。</p>
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 text-blue-900 italic font-medium">「我們模擬的是長期持有並領息再投資的狀態，這幫助投資者建立具備『現金流感』的財務地圖。」</div>
+                    </div>`,
+                edu_html: "",
+            },
+            en: {
+                nav_about: "About", nav_tool: "Simulator", nav_logic: "Algorithm", nav_edu: "Academy",
+                intro_title: "Dollar-Cost Averaging & Dividend Simulator",
+                intro_desc: "Simulate dollar-cost averaging across various payout frequencies to understand potential outcomes and refine your strategy.",
+                stat_monthly_invest: "Monthly Invested", stat_total_asset: "Final Portfolio", stat_total_interest: "Total Yield", stat_avg_monthly: "Est. Monthly Pay", stat_annual_ref: "Annual Yield:",
+                slider_title: "Investment Horizon", slider_sub: "", unit_y: "Y",
+                card_m: "Monthly Dividend (12x/yr)", 
+                card_q: "Quarterly Dividend (4x/yr)", 
+                card_s: "Semi-Annual Dividend (2x/yr)", 
+                card_a: "Annual Dividend (1x/yr)",
+                label_current: "Current Holdings", label_invest: "Monthly Invest", label_rate: "Annual Yield%",
+                aside_title: "Annual Growth Breakdown", th_y: "Year", th_a: "Asset", th_m: "Monthly", th_ref: "Annual",
+                chart_interest: "Compounded Interest", chart_invested: "Principal Invested", chart_total: "Total Asset",
+                label_year: "Year ", label_year_suffix: "",
+                about_link: "About Us",
+                privacy_link: "Privacy Policy",
+                terms_link: "Terms of Service",
+                disclaimer: "Disclaimer: This simulation is for reference only and does not guarantee future profits. Investing involves risk. © 2026 CASHFLOW NAVIGATION LAB.",
+                contact_title: "Contact & Support",
+                contact_desc: "For inquiries, suggestions, or bug reports, please reach out via our official email.",
+                cookie_text: "We use cookies to improve experience. By continuing, you agree to our policies.",
+                cookie_btn: "Accept & Close",
+                logic_title: "Core Algorithm",
+                logic_html: `
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">1. DCA Counting Principle</p>
+                        <p>This simulator adopts the "current period investment, current period participation" logic. The funds invested each month are assumed to be added before the ex-dividend date, fully included in the asset base for calculation. This aligns with most **dividend-paying financial products** where buying before the ex-dividend date qualifies you for the payout.</p>
+                        <p class="font-bold text-slate-800 text-lg">2. Periodic Compounding</p>
+                        <p>Interest is not calculated annually but according to the specific payout frequency. For example, if you invest $3,000 monthly in a monthly payout instrument with a 5% annual yield (approx. 0.4167% monthly):</p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 font-mono text-sm text-slate-500">
+                            M1: $3,000 + Interest $12.5 = $3,012.5<br>
+                            M2: $6,012.5 + Interest $25 = $6,037.5<br>
+                            M3: $9,037.5 + Interest $37.6 = $9,075.1<br>
+                            ...
+                        </div>
+                        <p>Calculated interest is immediately added to the following month's principal, maximizing the power of compounding.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">3. Yield & Cash Flow Conversion</p>
+                        <p>This tool defines your "Annual Return %" as the **Expected Annual Yield**, assuming all dividends are **automatically reinvested**. The "Est. Monthly Pay" is calculated by multiplying the end-of-year total assets by the yield and spreading it over 12 months. This allows you to see the future monthly cash flow as your asset base grows.</p>
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 text-blue-900 italic font-medium">"We simulate the state of long-term holding and dividend reinvestment, helping investors build a financial map with a 'cash flow sense'."</div>
+                    </div>`,
+                edu_html: "",
+            }
+        };
+
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            applyLang();
+        }
+
+        function applyLang() {
+            document.documentElement.lang = currentLang;
+            document.querySelectorAll('.i18n').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (langData[currentLang][key]) {
+                    el.innerText = langData[currentLang][key];
+                }
+            });
+            document.getElementById('sliderSub').innerText = langData[currentLang].slider_sub;
+            document.getElementById('logicGrid').innerHTML = langData[currentLang].logic_html;
+            run();
+        }
+
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('cookieAccepted', 'true');
+        }
+
+        let chart;
+        const roundToTwo = num => +(Math.round(num + "e+2") + "e-2");
+        const formatDisplay = (val) => (!isFinite(val) ? "∞" : val.toLocaleString());
+
+        // 修正後的計算核心：支援初始本金 (initial)
+        function calculateETF(initial, monthly, annualRate, years, freq) {
+            let asset = initial, interest = 0, invested = initial;
+            let history = [];
+            const monthsPerPeriod = 12 / freq;
+            const periodRate = (annualRate / 100) / freq;
+            for (let m = 1; m <= years * 12; m++) {
+                invested += monthly;
+                asset = roundToTwo(asset + monthly);
+                if (m > 0 && m % monthsPerPeriod === 0) {
+                    let curInt = roundToTwo(asset * periodRate);
+                    interest = roundToTwo(interest + curInt);
+                    asset = roundToTwo(asset + curInt);
+                }
+                if (m % 12 === 0) history.push({ asset, interest, invested });
+            }
+            return history;
+        }
+
+        function run() {
+            const years = parseInt(document.getElementById('years').value);
+            const configs = [{id:'m',f:12},{id:'q',f:4},{id:'s',f:2},{id:'a',f:1}];
+            let totalMBudget = 0;
+            let results = configs.map(c => {
+                // 讀取新的「現有持股」欄位 (id+_current)
+                const cur = Math.max(0, parseFloat(document.getElementById(c.id+'_current').value)||0);
+                const amt = Math.max(0, parseFloat(document.getElementById(c.id+'_amount').value)||0);
+                const r = Math.max(0, parseFloat(document.getElementById(c.id+'_rate').value)||0);
+                totalMBudget += amt;
+                return calculateETF(cur, amt, r, years, c.f);
+            });
+
+            document.getElementById('totalMonthlyBudget').innerText = "$" + formatDisplay(totalMBudget);
+            let labels = [], pData = [], iData = [], tableHtml = "";
+            let finalA = 0, finalI = 0, finalAI = 0;
+
+            for (let y = 0; y < years; y++) {
+                let yA=0, yI=0, yP=0, yAI=0;
+                configs.forEach((c, idx) => {
+                    const data = results[idx][y];
+                    yA += data.asset; yI += data.interest; yP += data.invested;
+                    yAI += (data.asset * Math.max(0, (parseFloat(document.getElementById(c.id+'_rate').value)||0)) / 100);
+                });
+                
+                const labelTxt = langData[currentLang].label_year + (y+1) + langData[currentLang].label_year_suffix;
+                labels.push(labelTxt);
+                pData.push(Math.floor(yP)); 
+                iData.push(Math.floor(yI));
+
+                tableHtml += `<tr class="hover:bg-blue-50 border-b border-slate-50 transition-colors">
+                    <td class="px-4 py-4 font-black text-slate-300">Y${y+1}</td>
+                    <td class="px-4 py-4 text-right text-slate-900 font-black">$${formatDisplay(Math.floor(yA))}</td>
+                    <td class="px-4 py-4 text-right text-emerald-600 font-black">$${formatDisplay(Math.floor(yAI / 12))}</td>
+                    <td class="px-4 py-4 text-right text-slate-300 italic font-medium text-[10px]">$${formatDisplay(Math.floor(yAI))}</td>
+                </tr>`;
+                if (y === years - 1) { finalA = yA; finalI = yI; finalAI = yAI; }
+            }
+            document.getElementById('totalAsset').innerText = "$" + formatDisplay(Math.floor(finalA));
+            document.getElementById('totalInterest').innerText = "$" + formatDisplay(Math.floor(finalI));
+            document.getElementById('avgMonthlyIncome').innerText = "$" + formatDisplay(Math.floor(finalAI / 12));
+            document.getElementById('totalAnnualIncome').innerText = "$" + formatDisplay(Math.floor(finalAI));
+            document.getElementById('tableBody').innerHTML = tableHtml;
+            updateChart(labels, pData, iData);
+        }
+
+        function updateChart(l, p, i) {
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: l,
+                    datasets: [
+                        { label: langData[currentLang].chart_interest, data: i, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.4, borderWidth: 4, pointRadius: 2 },
+                        { label: langData[currentLang].chart_invested, data: p, borderColor: '#cbd5e1', borderDash: [5, 5], tension: 0.4, borderWidth: 2, pointRadius: 0 }
+                    ]
+                },
+                options: { 
+                    responsive: true, maintainAspectRatio: false, 
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: { 
+                        legend: { position: 'top', labels: { font: { family: 'Noto Sans TC', weight: '900' } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) label += ': ';
+                                    if (context.parsed.y !== null) label += '$' + context.parsed.y.toLocaleString();
+                                    return label;
+                                },
+                                footer: function(tooltipItems) {
+                                    let sum = 0;
+                                    tooltipItems.forEach(function(tooltipItem) { sum += tooltipItem.parsed.y; });
+                                    return langData[currentLang].chart_total + ': $' + sum.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    scales: { y: { ticks: { callback: v => '$' + v.toLocaleString() } } }
+                }
+            });
+        }
+
+        window.onload = function() {
+            if (!localStorage.getItem('cookieAccepted')) {
+                document.getElementById('cookie-banner').style.display = 'flex';
+            }
+            const userLang = navigator.language || navigator.userLanguage; 
+            currentLang = userLang.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+            applyLang();
+        };
+    </script>
+</body>
+</html>
