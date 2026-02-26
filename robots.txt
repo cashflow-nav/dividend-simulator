@@ -4,4 +4,5 @@ Allow: /
 User-agent: Mediapartners-Google
 Allow: /
 
-Sitemap: https://your-future-domain.com/sitemap.xml
+
+Sitemap: https://dcadivsim.com/sitemap.xml
