@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-88CGD6LMRG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-88CGD6LMRG');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="canonical" href="https://dcadivsim.com/goal.html" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <title>Goal Planner - 財富達標計時器 | DCA & Dividend Simulator</title>
+    <meta name="description" content="Professional Investment Goal Planner. Calculate how many years it takes to reach your wealth target. 最專業的存股目標計算機，精確反推達成財富自由的倒數時間。">
+    <meta name="keywords" content="Goal Planner, 投資目標, 財務自由, 存股計算, 複利反推, 理財工具, 退休倒數, Dividend, DCA">
+    
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Goal Planner - 財富達標計時器">
+    <meta property="og:description" content="Calculate how long to reach your wealth target. 精確反推達成財富自由的倒數時間。">
+    <meta property="og:image" content="https://dcadivsim.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    
+    <link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/goal.html?lang=zh" />
+    <link rel="alternate" hreflang="en" href="https://dcadivsim.com/goal.html?lang=en" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+        
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; color: #1e293b; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        .glass-card { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .table-container { max-height: 70vh; overflow: auto; border-radius: 1.5rem; }
+        th { position: sticky; top: 0; z-index: 10; background: #f8fafc; }
+        td:first-child { position: sticky; left: 0; z-index: 20; background: #f1f5f9; min-width: 100px; }
+        th:first-child { position: sticky; top: 0; left: 0; z-index: 30; background: #f8fafc; min-width: 100px; }
+        #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 800px; z-index: 1000; display: none; }
+        .grid-cell { transition: all 0.2s; cursor: default; }
+        .grid-cell:hover { background-color: #eff6ff !important; transform: scale(1.02); z-index: 30; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-4 md:p-8">
+    <div id="cookie-banner" class="glass-card p-6 border-t-4 border-t-blue-600 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xl">
+        <p class="text-[10px] md:text-xs font-bold text-slate-600 i18n" data-key="cookie_text"></p>
+        <button onclick="acceptCookies()" class="bg-blue-600 text-white px-8 py-2 rounded-full text-[10px] font-black uppercase whitespace-nowrap hover:bg-blue-700 transition-colors i18n" data-key="cookie_btn"></button>
+    </div>
+
+    <div class="max-w-7xl mx-auto">
+        <header class="mb-10 border-b border-slate-200 pb-8">
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-6 mb-8">
+                <div class="flex-shrink-0 text-center lg:text-left">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-tighter text-slate-900 whitespace-nowrap">
+                        DCA & <span class="text-blue-600">Dividend</span> 
+                        <span class="text-slate-400 not-italic ml-1 text-xl md:text-2xl font-light">Simulator</span>
+                    </h1>
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1">Cashflow Navigation Lab</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end items-center gap-2">
+                    <a href="about.html" target="_blank" rel="noopener noreferrer" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600" data-key="nav_about"></a>
+                    <a href="academy.html" target="_blank" rel="noopener noreferrer" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600" data-key="nav_edu"></a>
+                    <button onclick="toggleLang()" class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black hover:bg-blue-600 transition-all uppercase whitespace-nowrap">中文 / EN</button>
+                </div>
+            </div>
+
+            <nav class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-[1.5rem] max-w-3xl mx-auto lg:mx-0">
+    <a href="index.html" class="flex items-center justify-center gap-3 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_compound">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>
+        </svg>
+        <span class="text-base md:text-lg font-black uppercase tracking-tight i18n" data-key="nav_compound">複利試算</span>
+    </a>
+    <a href="goal.html" class="flex items-center justify-center gap-3 bg-white text-blue-600 py-4 rounded-[1.25rem] shadow-sm ring-1 ring-slate-200 transition-all" data-aria-key="nav_goal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span class="text-base md:text-lg font-black uppercase tracking-tight i18n" data-key="nav_goal">目標計算機</span>
+    </a>
+</nav>
+
+        </header>
+
+        <section class="mb-8">
+            <div class="glass-card p-6 border-l-4 border-l-blue-600">
+                <h2 class="text-lg font-black text-slate-900 mb-2 i18n" data-key="intro_title"></h2>
+                <p class="text-sm text-slate-500 font-medium leading-relaxed i18n" data-key="intro_desc"></p>
+            </div>
+        </section>
+	
+        <main class="space-y-12">
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="glass-card p-6 border-t-4 border-t-blue-500 shadow-sm">
+        <label for="currentAge" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 i18n" data-key="label_age"></label>
+        <input type="number" id="currentAge" name="currentAge" value="0" oninput="renderMatrix()" 
+               onfocus="if(this.value=='0')this.value=''" onblur="if(this.value=='')this.value='0'" 
+               class="w-full bg-transparent font-black text-2xl outline-none text-slate-900">
+    </div>
+
+    <div class="glass-card p-6 border-t-4 border-t-indigo-500 shadow-sm">
+        <label for="targetAmount" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 i18n" data-key="label_target"></label>
+        <div class="flex items-center gap-2">
+            <span class="text-xl font-black text-indigo-300">$</span>
+            <input type="number" id="targetAmount" name="targetAmount" value="0" oninput="renderMatrix()" 
+                   onfocus="if(this.value=='0')this.value=''" onblur="if(this.value=='')this.value='0'" 
+                   class="w-full bg-transparent font-black text-2xl outline-none text-slate-900">
+        </div>
+    </div>
+
+    <div class="glass-card p-6 border-t-4 border-t-slate-700 shadow-sm">
+        <label for="initialCapital" class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 i18n" data-key="label_initial"></label>
+        <div class="flex items-center gap-2">
+            <span class="text-xl font-black text-slate-300">$</span>
+            <input type="number" id="initialCapital" name="initialCapital" value="0" oninput="renderMatrix()" 
+                   onfocus="if(this.value=='0')this.value=''" onblur="if(this.value=='')this.value='0'" 
+                   class="w-full bg-transparent font-black text-2xl outline-none text-slate-900">
+        </div>
+    </div>
+</section>
+
+            <section class="bg-white border border-slate-200 rounded-[2.5rem] p-4 md:p-8 shadow-sm overflow-hidden">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 px-4 gap-6">
+                    <h2 class="text-sm font-black uppercase tracking-[0.2em] text-slate-800 i18n" data-key="matrix_title"></h2>
+                    <div class="flex bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+    <button onclick="changeRange(1000, 20000, 1000)" class="i18n px-4 py-2 text-[10px] font-black rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase" data-aria-key="btn_range_1">1k-20k</button>
+    <button onclick="changeRange(20000, 100000, 5000)" class="i18n px-4 py-2 text-[10px] font-black rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase" data-aria-key="btn_range_2">20k-100k</button>
+    <button onclick="changeRange(100000, 200000, 10000)" class="i18n px-4 py-2 text-[10px] font-black rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase" data-aria-key="btn_range_3">100k-200k</button>
+</div>
+                </div>
+                <div class="table-container border border-slate-100">
+                    <table class="w-full border-collapse text-center">
+                        <thead><tr id="matrixHead"></tr></thead>
+                        <tbody id="matrixBody" class="text-[11px] md:text-xs"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="mt-24">
+                <div class="glass-card p-8 md:p-12 bg-white">
+                    <h2 class="text-3xl font-black text-slate-900 mb-8 border-l-8 border-blue-600 pl-6 italic uppercase i18n" data-key="logic_title"></h2>
+                    <div id="logicContent" class="grid grid-cols-1 md:grid-cols-2 gap-12 text-slate-600 leading-relaxed text-sm md:text-base">
+                        </div>
+                </div>
+            </section>
+
+            <section class="mt-24 border-t border-slate-200 pt-16">
+                <div class="bg-slate-900 p-8 md:p-12 rounded-[2rem] text-white flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div>
+                        <h3 class="text-2xl font-black italic mb-2 i18n" data-key="contact_title"></h3>
+                        <p class="text-slate-400 text-sm i18n" data-key="contact_desc"></p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Official Support</p>
+                        <a href="mailto:service@dcadivsim.com" class="text-xl md:text-2xl font-black hover:text-blue-400 transition-colors">service@dcadivsim.com</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-24 border-t border-slate-200 py-16 text-center">
+    <p class="text-xs font-black text-slate-400 uppercase tracking-[0.5em] mb-4">Cashflow Navigation Lab</p>
+    
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+        <a href="about.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="about_link"></a>
+        <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="privacy_link"></a>
+        <a href="terms.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="terms_link"></a>
+    </div>
+
+    <p class="text-[10px] text-slate-400 max-w-2xl mx-auto px-4 italic leading-loose i18n" data-key="disclaimer"></p>
+</footer>
+    </div>
+
+    <script>
+        let currentLang = 'en'; 
+        let currentMin = 1000, currentMax = 20000, currentStep = 1000;
+
+        const langData = {
+            zh: {
+                nav_compound: "複利試算", nav_goal: "目標計算機",
+                nav_about: "關於我們", nav_edu: "存股教室",
+                intro_title: "財富達標計時器",
+                intro_desc: "輸入您的財富目標與現有資產，我們將透過核心公式反推達成年數。下方的矩陣地圖能幫助您直觀對比在不同投入金額與預期報酬率下，達成目標時的年齡與所需時間。",
+                label_age: "目前年齡", label_target: "目標資產", label_initial: "現有持股金額",
+                matrix_title: "投資戰略地圖 (達成年數 / 歲數)",
+                th_invest: "月投入\\報酬", unit_y: "年", unit_age: "歲",
+                logic_title: "核心演算詳解",
+                logic_html: `
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">1. 達成年數反推 (N-Period Derivation)</p>
+                        <p>本工具採用年金終值公式 (Future Value of Annuity) 的數學變形，透過對數函數 (Logarithm) 運算，精確算出在特定月投入金額與預期報酬率下，從現有資產到達目標資產所需的總期數。</p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 font-mono text-xs text-slate-500">
+                            公式參考: n = log((FV*r + P) / (PV*r + P)) / log(1 + r)
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">2. 財務里程碑與生命週期同步</p>
+                        <p>除了算出所需年數，地圖更進一步結合您的「目前年齡」，讓您直觀看到在不同投資路徑下，達成財富目標時的實際歲數。這能幫助您在職涯規劃與退休準備之間，找到最合適的資源分配點。</p>
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 text-blue-900 italic font-medium">「這不僅是資產計算，更是一張視覺化的生命戰略地圖。」</div>
+                    </div>`,
+                contact_title: "聯繫與支援",
+                contact_desc: "若有任何問題、建議或錯誤回報，歡迎透過官方郵件聯繫。",
+                about_link: "關於我們 (About)",
+                privacy_link: "隱私權政策 (Privacy)",
+                terms_link: "使用條款 (Terms)",
+                disclaimer: "免責聲明：本模擬結果僅供參考，不代表未來獲利保證。投資必有風險，請諮詢專業顧問。 © 2026 CASHFLOW NAVIGATION LAB.",
+                cookie_text: "本網站使用 Cookie 以提升用戶體驗與分析流量。點擊「同意」代表您接受我們的隱私權條款。",
+                cookie_btn: "同意並關閉",
+                btn_range_1: "切換金額範圍 1千至2萬",
+                btn_range_2: "切換金額範圍 2萬至10萬",
+                btn_range_3: "切換金額範圍 10萬至20萬"
+            },
+            en: {
+                nav_compound: "DCA & DIV SIM", nav_goal: "Goal Planner",
+                nav_about: "About", nav_edu: "Academy",
+                intro_title: "Target Achievement Timer",
+                intro_desc: "Enter your wealth target and initial capital to see the years required. The matrix below visualizes your lifecycle milestones across various investment scenarios.",
+                label_age: "Current Age", label_target: "Target Goal", label_initial: "Initial Capital",
+                matrix_title: "Strategic Investment Map (Years / Age)",
+                th_invest: "Monthly\\Rate", unit_y: "y", unit_age: "y/o",
+                logic_title: "Core Algorithm",
+                logic_html: `
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">1. N-Period Derivation</p>
+                        <p>This tool uses a mathematical variation of the Future Value of Annuity formula. By applying logarithmic functions, it precisely calculates the number of periods required to reach your wealth target from your current capital.</p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 font-mono text-xs text-slate-500">
+                            Ref: n = log((FV*r + P) / (PV*r + P)) / log(1 + r)
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">2. Lifecycle Milestone Sync</p>
+                        <p>Beyond calculating the years needed, the map integrates your "Current Age" to visualize your life stage upon reaching the goal. This helps you find the optimal balance between career progression and retirement planning.</p>
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 text-blue-900 italic font-medium">"It's not just an asset calculator; it's a visual strategic map for your life."</div>
+                    </div>`,
+                contact_title: "Contact & Support",
+                contact_desc: "For inquiries, suggestions, or bug reports, please reach out via our official email.",
+                about_link: "About Us",
+                privacy_link: "Privacy Policy",
+                terms_link: "Terms of Service",
+                disclaimer: "Disclaimer: This simulation is for reference only and does not guarantee future profits. Investing involves risk. © 2026 CASHFLOW NAVIGATION LAB.",
+                cookie_text: "We use cookies to improve experience. By continuing, you agree to our policies.",
+                cookie_btn: "Accept & Close",
+                btn_range_1: "Switch range to 1k-20k",
+                btn_range_2: "Switch range to 20k-100k",
+                btn_range_3: "Switch range to 100k-200k"
+            }
+        };
+
+        function changeRange(min, max, step) {
+            currentMin = min; currentMax = max; currentStep = step;
+            renderMatrix();
+        }
+
+        function renderMatrix() {
+            const age = parseFloat(document.getElementById('currentAge').value) || 0;
+            const target = parseFloat(document.getElementById('targetAmount').value) || 0;
+            const pv = parseFloat(document.getElementById('initialCapital').value) || 0;
+            const rates = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 0.12, 0.15];
+            const head = document.getElementById('matrixHead');
+            const body = document.getElementById('matrixBody');
+
+            let headHtml = `<th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 whitespace-nowrap">${langData[currentLang].th_invest}</th>`;
+            rates.forEach(r => { 
+    headHtml += `<th class="p-4 text-[10px] font-black text-slate-700 border-r border-slate-100">${Math.round(r * 100)}%</th>`; 
+});
+            head.innerHTML = headHtml;
+
+            const fragment = document.createDocumentFragment();
+            for (let p = currentMin; p <= currentMax; p += currentStep) {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-50 hover:bg-blue-50/50 transition-colors";
+                let rowHtml = `<td class="p-3 font-black text-slate-500 bg-slate-50 border-r border-slate-200 text-[10px]">$${p.toLocaleString()}</td>`;
+                rates.forEach(r => {
+                    const rM = r / 12;
+                    let n = (rM > 0) ? Math.log((target * rM + p) / (pv * rM + p)) / Math.log(1 + rM) : (target - pv) / p;
+                    const years = Math.max(0, n / 12);
+                    const fAge = Math.round(age + years);
+                    rowHtml += `<td class="p-3 border-r border-slate-50 grid-cell"><div class="font-bold text-slate-800">${years.toFixed(1)}${langData[currentLang].unit_y}</div><div class="text-[9px] text-slate-400 font-medium">(${fAge}${langData[currentLang].unit_age})</div></td>`;
+                });
+                tr.innerHTML = rowHtml;
+                fragment.appendChild(tr);
+            }
+            body.innerHTML = "";
+            body.appendChild(fragment);
+        }
+
+        function renderLogic() {
+            document.getElementById('logicContent').innerHTML = langData[currentLang].logic_html;
+        }
+
+        function applyLang() {
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('.i18n').forEach(el => {
+        // 1. 處理一般文字翻譯
+        const key = el.getAttribute('data-key');
+        if (key && langData[currentLang][key]) el.innerText = langData[currentLang][key];
+
+        // 2. 處理 Accessibility (aria-label) 翻譯，這是跑分關鍵
+        const ariaKey = el.getAttribute('data-aria-key');
+        if (ariaKey && langData[currentLang][ariaKey]) {
+            el.setAttribute('aria-label', langData[currentLang][ariaKey]);
+        }
+    });
+
+    // 更新導覽列連結，確保跳轉時語系不丟失
+    document.querySelectorAll('nav a').forEach(link => {
+        const href = link.getAttribute('href').split('?')[0];
+        link.setAttribute('href', `${href}?lang=${currentLang}`);
+    });
+
+    renderMatrix();
+    renderLogic();
+}
+
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            applyLang();
+        }
+
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('cookieAccepted', 'true');
+        }
+
+        window.onload = function() {
+    if (!localStorage.getItem('cookieAccepted')) {
+        document.getElementById('cookie-banner').style.display = 'flex';
+    }
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    
+    if (langParam && (langParam === 'zh' || langParam === 'en')) {
+        currentLang = langParam;
+    } else {
+        const userLang = navigator.language || navigator.userLanguage; 
+        currentLang = userLang.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+    }
+    
+    applyLang();
+};
+    </script>
+</body>
+</html>

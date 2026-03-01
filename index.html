@@ -59,6 +59,7 @@
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="p-4 md:p-8">
 
     <div id="cookie-banner" class="glass-card p-6 border-t-4 border-t-blue-600 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xl">
@@ -67,25 +68,32 @@
     </div>
 
     <div class="max-w-7xl mx-auto">
-        <header class="mb-10 flex flex-col lg:flex-row justify-between items-center gap-6 border-b border-slate-200 pb-6">
-    <div class="flex-shrink-0 text-center lg:text-left">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-tighter text-slate-900 whitespace-nowrap">
-            DCA & <span class="text-blue-600">Dividend</span> 
-            <span class="text-slate-400 not-italic ml-1 text-xl md:text-2xl font-light">Simulator</span>
-        </h1>
-        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1">Cashflow Navigation Lab</p>
+        <header class="mb-10 border-b border-slate-200 pb-8">
+    <div class="flex flex-col lg:flex-row justify-between items-center gap-6 mb-8">
+        <div class="flex-shrink-0 text-center lg:text-left">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-tighter text-slate-900 whitespace-nowrap">
+                DCA & <span class="text-blue-600">Dividend</span> 
+                <span class="text-slate-400 not-italic ml-1 text-xl md:text-2xl font-light">Simulator</span>
+            </h1>
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1">Cashflow Navigation Lab</p>
+        </div>
+
+        <div class="flex flex-wrap justify-center md:justify-end items-center gap-2">
+            <a href="about.html" target="_blank" rel="noopener noreferrer" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_about">關於我們</a>
+            <a href="academy.html" target="_blank" rel="noopener noreferrer" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_edu">存股教室</a>
+            <button onclick="toggleLang()" class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black hover:bg-blue-600 transition-all uppercase whitespace-nowrap">中文 / EN</button>
+        </div>
     </div>
 
-    <nav class="flex flex-col md:flex-row items-center justify-end w-full gap-4">
-        <div class="flex flex-wrap justify-center md:justify-end items-center gap-2 md:gap-4">
-            <a href="about.html" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all backdrop-blur-md border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_about">關於我們</a>
-            <a href="#tool" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all backdrop-blur-md border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_tool">模擬工具</a>
-            <a href="#logic" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all backdrop-blur-md border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_logic">計算邏輯</a>
-            <a href="academy.html" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all backdrop-blur-md border border-slate-200 text-slate-600 whitespace-nowrap" data-key="nav_edu">存股教室</a>
-        </div>
-        <button onclick="toggleLang()" aria-label="Switch Language" class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black hover:bg-blue-600 transition-all uppercase tracking-tighter whitespace-nowrap">
-            中文 / EN
-        </button>
+    <nav class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-[1.5rem] max-w-3xl mx-auto lg:mx-0">
+        <a href="index.html" class="flex items-center justify-center gap-3 bg-white text-blue-600 py-4 rounded-[1.25rem] shadow-sm ring-1 ring-slate-200 transition-all" data-aria-key="nav_compound">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+            <span class="text-base md:text-lg font-black uppercase tracking-tight i18n" data-key="nav_compound">複利試算</span>
+        </a>
+        <a href="goal.html" class="flex items-center justify-center gap-3 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_goal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="text-base md:text-lg font-black uppercase tracking-tight i18n" data-key="nav_goal">目標計算機</span>
+        </a>
     </nav>
 </header>
 
@@ -192,7 +200,7 @@
             </aside>
         </div>
 
-        <section id="logic" class="mt-24 scroll-mt-24">
+        <section class="mt-24">
             <div class="glass-card p-8 md:p-12 bg-white">
                 <h2 class="text-3xl font-black text-slate-900 mb-8 border-l-8 border-blue-600 pl-6 italic uppercase i18n" data-key="logic_title"></h2>
                 <div id="logicGrid" class="grid grid-cols-1 md:grid-cols-2 gap-12 text-slate-600 leading-relaxed text-sm md:text-base"></div>
@@ -216,9 +224,9 @@
             <p class="text-xs font-black text-slate-400 uppercase tracking-[0.5em] mb-4">Cashflow Navigation Lab</p>
             
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
-                <a href="about.html" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="about_link"></a>
-                <a href="privacy.html" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="privacy_link"></a>
-                <a href="terms.html" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="terms_link"></a>
+                <a href="about.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="about_link"></a>
+                <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="privacy_link"></a>
+                <a href="terms.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="terms_link"></a>
             </div>
 
             <p class="text-[10px] text-slate-400 max-w-2xl mx-auto px-4 italic leading-loose i18n" data-key="disclaimer"></p>
@@ -229,7 +237,8 @@
         let currentLang = 'en';
         const langData = {
             zh: {
-                nav_about: "關於我們", nav_tool: "模擬工具", nav_logic: "計算邏輯", nav_edu: "存股教室",
+                nav_compound: "複利試算", nav_goal: "目標計算機",
+                nav_about: "關於我們", nav_edu: "存股教室",
                 intro_title: "定期定額存股模擬器",
                 intro_desc: "您可以模擬在不同配息頻率標的上，定期定額投入不同金額，以了解可能的結果，並擬定未來策略。",
                 stat_monthly_invest: "每月合計投入", stat_total_asset: "計畫終點總價值", stat_total_interest: "累計總獲息", stat_avg_monthly: "預估平均月領", stat_annual_ref: "預估年息:",
@@ -273,7 +282,8 @@
                 label_rate_aria: "年化報酬率",
             },
             en: {
-                nav_about: "About", nav_tool: "Simulator", nav_logic: "Algorithm", nav_edu: "Academy",
+                nav_compound: "DCA & DIV SIM", nav_goal: "Goal Planner",
+                nav_about: "About", nav_edu: "Academy",
                 intro_title: "Dollar-Cost Averaging & Dividend Simulator",
                 intro_desc: "Simulate dollar-cost averaging across various payout frequencies to understand potential outcomes and refine your strategy.",
                 stat_monthly_invest: "Monthly Invested", stat_total_asset: "Final Portfolio", stat_total_interest: "Total Yield", stat_avg_monthly: "Est. Monthly Pay", stat_annual_ref: "Annual Yield:",
@@ -327,23 +337,30 @@
         }
 
         function applyLang() {
-    document.documentElement.lang = currentLang;
-    document.querySelectorAll('.i18n').forEach(el => {
-        const key = el.getAttribute('data-key');
-        const ariaKey = el.getAttribute('data-aria-key'); 
-        
-        if (key && langData[currentLang][key]) {
-            el.innerText = langData[currentLang][key];
+            document.documentElement.lang = currentLang;
+            document.querySelectorAll('.i18n').forEach(el => {
+                const key = el.getAttribute('data-key');
+                const ariaKey = el.getAttribute('data-aria-key'); 
+                
+                if (key && langData[currentLang][key]) {
+                    el.innerText = langData[currentLang][key];
+                }
+                
+                if (ariaKey && langData[currentLang][ariaKey]) { 
+                    el.setAttribute('aria-label', langData[currentLang][ariaKey]);
+                }
+            });
+
+            // 更新導覽列連結，確保跳轉時語系不丟失
+            document.querySelectorAll('nav a').forEach(link => {
+                const href = link.getAttribute('href').split('?')[0];
+                link.setAttribute('href', `${href}?lang=${currentLang}`);
+            });
+
+            document.getElementById('sliderSub').innerText = langData[currentLang].slider_sub;
+            document.getElementById('logicGrid').innerHTML = langData[currentLang].logic_html;
+            run();
         }
-        
-        if (ariaKey && langData[currentLang][ariaKey]) { 
-            el.setAttribute('aria-label', langData[currentLang][ariaKey]);
-        }
-    });
-    document.getElementById('sliderSub').innerText = langData[currentLang].slider_sub;
-    document.getElementById('logicGrid').innerHTML = langData[currentLang].logic_html;
-    run();
-}
 
         function acceptCookies() {
             document.getElementById('cookie-banner').style.display = 'none';
@@ -461,8 +478,17 @@
             if (!localStorage.getItem('cookieAccepted')) {
                 document.getElementById('cookie-banner').style.display = 'flex';
             }
-            const userLang = navigator.language || navigator.userLanguage; 
-            currentLang = userLang.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            
+            if (langParam && (langParam === 'zh' || langParam === 'en')) {
+                currentLang = langParam;
+            } else {
+                const userLang = navigator.language || navigator.userLanguage; 
+                currentLang = userLang.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+            }
+            
             applyLang();
         };
     </script>    
