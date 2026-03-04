@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lesson 1: The Magic of Compounding. Understand how time and returns drive wealth growth. 第一課：複利的魔力。了解時間與報酬率如何共同創造驚人的財富增長。">
+    <title>Lesson 1: The Magic of Compounding 第一課：複利的魔力 - Academy | DCA & Dividend Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; color: #1e293b; line-height: 1.8; }
+        .glass-card { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; }
+        h2 { border-left: 4px solid #3b82f6; padding-left: 1rem; margin-top: 2.5rem; margin-bottom: 1.25rem; font-weight: 900; color: #0f172a; font-size: 1.6rem; }
+        h3 { font-size: 1.3rem; font-weight: 900; color: #1e293b; margin-top: 2rem; margin-bottom: 0.75rem; display: flex; align-items: center; }
+        h3::before { content: "•"; color: #3b82f6; margin-right: 0.5rem; font-size: 1.5rem; }
+        p { margin-bottom: 1.25rem; }
+        strong { color: #0f172a; }
+        .lab-task { background-color: #f8fafc; border: 2px dashed #3b82f6; border-radius: 1rem; padding: 1.5rem; margin-top: 3rem; }
+        .divider { height: 1px; background: linear-gradient(to right, #e2e8f0, transparent); margin: 4rem 0; }
+        .en-version { color: #64748b; }
+        .tool-link { color: #3b82f6; font-weight: 700; text-decoration: underline; }
+        .tool-link:hover { color: #1d4ed8; }
+    </style>
+</head>
+<body class="p-6 md:p-16">
+    <div class="max-w-4xl mx-auto">
+        <div class="glass-card p-8 md:p-12 shadow-xl">
+
+            <a href="Academy.html" class="inline-flex items-center text-slate-500 hover:text-blue-600 font-bold text-sm mb-6 transition-all hover:-translate-x-1">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to Academy / 返回存股教室
+            </a>            
+
+            <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-2 leading-tight uppercase italic tracking-tighter">
+                Stock <span class="text-blue-600">Academy</span>
+            </h1>
+            <br>
+            <p class="text-xl font-bold text-slate-500 mb-10">1. The Magic of Compounding (第一課：複利的魔力與時間的關係)</p>
+
+            <article class="zh-content">
+                <h2 class="text-2xl">複利效應—時間的財富槓桿</h2>
+                <br>
+                <h3>什麼是複利？</h3>
+                <p class="mb-4">複利（Compound Interest）被譽為世界第八大奇蹟。它的原理其實很簡單：將你獲得的利息再投入本金，讓利息在下一個週期也能產生利息。這就像滾雪球一樣，起初雪球很小，但隨著它不斷滾動，接觸面（本金）越來越大，增長的速度也會越來越驚人。</p>
+                <p class="mb-4">在存股的過程中，複利不是單純的加法（1+1=2），而是乘法運算。只要你給予足夠的時間，即使初始資金不多，最終的結果也會令人驚嘆。</p>
+
+                <h3>複利的三大要素：本金、利率、時間</h3>
+                <p class="mb-4">在 <a href="index.html" class="tool-link">DCA & Dividend Simulator</a> 中，你會發現資產成長的斜率取決於三個變數。然而，大多數人過度關注「利率」（報酬率），卻忽略了最容易控制且最強大的變數——時間。</p>
+         
+                <ul class="list-none space-y-2 mb-4">
+                    <li><span class="text-blue-600 font-bold">-</span> <strong>本金</strong>：是你的種子。</li>
+                    <li><span class="text-blue-600 font-bold">-</span> <strong>利率</strong>：是環境的養分。</li>
+                    <li><span class="text-blue-600 font-bold">-</span> <strong>時間</strong>：是讓種子長成大樹的陽光。</li>
+                </ul>
+                
+                <h3>進階知識：72 法則</h3>
+                <p>要理解複利的力量，最快的方法就是使用「72 法則」。這是一個簡單的數學速算法，用來估算資產翻倍所需的時間：</p>
+                <p class="bg-slate-50 p-4 rounded-lg font-mono text-center my-4 border border-slate-100">
+                    公式：72 ÷ 年化報酬率 = 翻倍年數
+                </p>
+                <p class="mb-4">例如，如果你的投資標的年化報酬率是 6%，那麼 $72 / 6 = 12$。這代表你的資產每 12 年就會翻一倍。如果你今年 25 歲投資 100 萬，到 37 歲會變成 200 萬，到 49 歲會變成 400 萬，而到了 61 歲退休時，這筆錢會成長到 800 萬。</p>
+
+                <h3>為何前期總是感到「無感」？</h3>
+                <p class="mb-4">在投資的前 5 到 10 年，大多數投資者會面臨第一個心理關卡。此時資產的增長主要來自於你的「主動投入」（本金），複利產生的利息微乎其微。這就是所謂的「紮根期」。當你觀察模擬器的圖表時，你會發現資產曲線在前段幾乎是平緩的。</p>
+
+                <h3>曲棍球桿效應 (Hockey Stick Effect)</h3>
+                <p>一旦跨過某個臨界點（通常是 15 年以上），利息再投入的效果會開始爆發。此時，你的資產曲線會從平緩轉向垂直向上，這種現象被稱為「曲棍球桿效應」。在 20 年或 30 年的長期計畫中，最後 5 年所產生的財富增長，往往會超過前 15 年的總和。</p>
+
+                <div class="lab-task">
+                    <h4 class="font-black text-blue-600 text-lg mb-4 flex items-center">
+                        🛠️ 實驗室任務：親自驗證複利的力量
+                    </h4>
+                    <ul class="list-decimal list-inside space-y-2">
+                        <li>回到 <a href="index.html" class="tool-link">[DCA & Dividend Simulator]</a>。</li>
+                        <li>將「投資年限」分別設定為 10 年 與 30 年 進行對比。</li>
+                        <li>觀察 30 年計畫中的最後 10 年，資產跳動的速度。</li>
+                    </ul>
+                    <p class="mt-4 italic text-sm text-slate-500">你會發現，成功的投資人不是因為贏在起跑點，而是因為他們從未中途離場。</p>
+                </div>
+            </article>
+
+            <div class="divider"></div>
+
+            <article class="en-version">
+                <h2 class="text-2xl text-slate-700">The Power of Compound Interest</h2>
+                <br>
+                <h3>What is Compounding?</h3>
+                <p class="mb-4">Compound interest is often hailed as the eighth wonder of the world. The principle is simple: reinvest the interest you earn back into your principal, allowing that interest to generate its own interest in the next period. It’s like a rolling snowball—small at first, but as it gathers more snow (principal), the growth speed becomes breathtaking.</p>
+                <p class="mb-4">In the journey of dividend investing, compounding is not mere addition ($1+1=2$); it is a geometric progression. Given enough time, even a small initial capital can grow into an astonishing sum.</p>
+
+                <h3>The Three Pillars of Compounding</h3>
+                <p class="mb-4">In our <a href="index.html" class="tool-link">DCA & Dividend Simulator</a>, you will notice that the slope of your asset growth depends on three variables. However, most people obsess over the "Interest Rate" (returns) while ignoring the most controllable and powerful variable: Time.</p>
+               
+                <ul class="list-none space-y-2 mb-4">
+                    <li><span class="text-blue-600/50 font-bold">-</span> <strong>Principal</strong>: Your seeds.</li>
+                    <li><span class="text-blue-600/50 font-bold">-</span> <strong>Rate</strong>: The nutrients in the soil.</li>
+                    <li><span class="text-blue-600/50 font-bold">-</span> <strong>Time</strong>: The sunlight that grows the tree.</li>
+                </ul>
+
+                <h3>Pro Tip: The Rule of 72</h3>
+                <p>The fastest way to understand the power of compounding is the "Rule of 72." This is a quick mental math hack to estimate how long it takes for your investment to double:</p>
+                <p class="bg-slate-50/50 p-4 rounded-lg font-mono text-center my-4 border border-slate-100">
+                    Formula: 72 ÷ Annual Return = Years to Double
+                </p>
+                <p class="mb-4">For example, if your annual return is 6%, then $72 / 6 = 12$. This means your investment doubles every 12 years. If you invest $1M at age 25, it grows to $2M by age 37, $4M by age 49, and $8M by the time you retire at 61.</p>
+
+                <h3>Why the Beginning Feels Slow</h3>
+                <p class="mb-4">During the first 5 to 10 years, most investors face a psychological hurdle. Growth is primarily driven by your active contributions (principal); the interest earned feels negligible. This is the "rooting phase." When looking at our simulator's chart, you’ll notice the curve starts almost flat.</p>
+
+                <h3>The Hockey Stick Effect</h3>
+                <p>Once you pass a tipping point (usually 15+ years), the effect of reinvesting dividends explodes. The curve turns vertical—a phenomenon known as the "Hockey Stick Effect." In a 30-year plan, the wealth growth in the final 5 years often exceeds the total growth of the first 15 years.</p>
+
+                <div class="lab-task border-slate-200">
+                    <h4 class="font-black text-slate-700 text-lg mb-4">🛠️ Lab Task: Verify the Power Yourself</h4>
+                    <ul class="list-decimal list-inside space-y-2">
+                        <li>Return to the <a href="index.html" class="tool-link">[DCA & Dividend Simulator]</a>.</li>
+                        <li>Set the "Investment Period" to 10 years and 30 years for comparison.</li>
+                        <li>Observe the speed of asset growth in the final 10 years of a 30-year plan.</li>
+                    </ul>
+                    <p class="mt-4 italic text-sm text-slate-400">You will find that successful investors don't win because they started with more; they win because they never left the market.</p>
+                </div>
+            </article>
+
+           <div class="mt-12 mb-8 text-right">
+    <a href="lesson2.html" class="flex items-center justify-between p-8 border border-slate-200 rounded-3xl hover:bg-blue-50 hover:border-blue-300 transition-all group shadow-sm">
+        <div class="text-left">
+            <span class="block text-xs text-slate-400 font-bold uppercase tracking-widest mb-1 group-hover:text-blue-500">Next Lesson / 下一課</span>
+            <span class="text-base font-bold text-slate-600 italic">How DCA Averages Costs (第二課：定期定額如何平滑成本)</span>
+        </div>
+        <svg class="w-6 h-6 text-blue-600 group-hover:translate-x-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+    </a>
+</div>
+
+            <footer class="mt-24 border-t border-slate-200 py-16 text-center">
+    <p class="text-xs font-black text-slate-400 uppercase tracking-[0.5em] mb-4">Cashflow Navigation Lab</p>
+    
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+        <a href="about.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">關於我們 (About Us)</a>
+        <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">隱私權政策 (Privacy Policy)</a>
+        <a href="terms.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">使用條款 (Terms of Service)</a>
+    </div>
+
+    <p class="text-[10px] text-slate-400 max-w-4xl mx-auto px-4 italic leading-loose">
+        免責聲明：本模擬結果僅供參考，不代表未來獲利保證。投資必有風險，請諮詢專業顧問。<br>
+        Disclaimer: This simulation is for reference only and does not guarantee future profits. Investing involves risk.
+        <br>
+        <span class="mt-2 block not-italic">© 2026 CASHFLOW NAVIGATION LAB.</span>
+    </p>
+</footer>
+        </div>
+    </div>
+</body>
+</html>

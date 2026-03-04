@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lesson 2: How DCA Averages Costs. Learn how Dollar-Cost Averaging lowers your average cost per share during market volatility. 第二課：定期定額如何平滑成本。深入了解 DCA 策略如何在市場波動中降低每股平均成本。">
+    <title>Lesson 2: How DCA Averages Costs 第二課：定期定額如何平滑成本 - Academy | DCA & Dividend Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; color: #1e293b; line-height: 1.8; }
+        .glass-card { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; }
+        h2 { border-left: 4px solid #3b82f6; padding-left: 1rem; margin-top: 2.5rem; margin-bottom: 1.25rem; font-weight: 900; color: #0f172a; font-size: 1.6rem; }
+        h3 { font-size: 1.3rem; font-weight: 900; color: #1e293b; margin-top: 2rem; margin-bottom: 0.75rem; display: flex; align-items: center; }
+        h3::before { content: "•"; color: #3b82f6; margin-right: 0.5rem; font-size: 1.5rem; }
+        p { margin-bottom: 1.25rem; }
+        strong { color: #0f172a; }
+        .lab-task { background-color: #f8fafc; border: 2px dashed #3b82f6; border-radius: 1rem; padding: 1.5rem; margin-top: 3rem; }
+        .divider { height: 1px; background: linear-gradient(to right, #e2e8f0, transparent); margin: 4rem 0; }
+        .en-version { color: #64748b; }
+        .tool-link { color: #3b82f6; font-weight: 700; text-decoration: underline; }
+        .tool-link:hover { color: #1d4ed8; }
+    </style>
+</head>
+<body class="p-6 md:p-16">
+    <div class="max-w-4xl mx-auto">
+        <div class="glass-card p-8 md:p-12 shadow-xl">
+            
+            <a href="Academy.html" class="inline-flex items-center text-slate-500 hover:text-blue-600 font-bold text-sm mb-6 transition-all hover:-translate-x-1">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to Academy / 返回存股教室
+            </a> 
+
+            <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-2 leading-tight uppercase italic tracking-tighter">
+                Stock <span class="text-blue-600">Academy</span>
+            </h1>
+            <br>
+            <p class="text-xl font-bold text-slate-500 mb-10">2. How DCA Averages Costs (第二課：定期定額如何平滑成本)</p>
+
+            <article class="zh-content">
+                <h2 class="text-2xl">定期定額全攻略—如何在波動中穩健獲利</h2>
+                <br>
+                <h3>定期定額 (DCA) 的核心原理</h3>
+                <p class="mb-4">定期定額（Dollar-Cost Averaging, 簡稱 DCA）是一種簡單卻極其強大的投資策略。它的操作方式是在固定的時間（例如每月 5 號）投入固定的金額購買特定標的。這種策略的核心在於「紀律」而非「預測」。</p>
+                <p class="mb-4">在股市波動中，同樣的金額在股價高位時會買入較少的股數，而在股價低位時則能自動買入較多股數。長期下來，你的持有成本會趨於這段時間的平均價格，有效降低了「一次性買在最高點」的風險。</p>
+
+                <h3>破解「擇時進場」的迷思</h3>
+                <p class="mb-4">許多投資者試圖尋找市場的最低點（Market Timing），但事實證明，即使是專業經理人也難以精準預測波動。試圖擇時往往會導致兩種後果：在下跌時恐懼而不敢進場，或在暴漲時因為空手而感到焦慮。DCA 解決了心理層面的壓力，讓你不再受市場情緒左右。</p>
+
+                <h3>微笑曲線：為什麼下跌是你的好朋友？</h3>
+                <p class="mb-4">在定期定額的世界裡，最經典的理論就是「微笑曲線」。想像股價經歷了一次先跌後回升的過程。單筆投資者必須等股價回到原點才能解套；但定期定額者在股價下跌的過程中（曲線的底部）持續累積了大量的廉價股數。</p>
+                <p class="mb-4">因此，當股價僅僅回升到一半時，定期定額者的總資產往往已經轉虧為盈。這就是為什麼對於長期投資者來說，市場回檔反而是拉低成本、加速累積財富的最佳時機。</p>
+
+                <h3>DCA 的長期成效</h3>
+                <p class="mb-4">根據歷史數據，長期執行定期定額的勝率遠高於頻繁進出的短線操作。它能確保你始終留在場內（Stay in the market），不會錯過任何一次暴漲的機會。在本模擬器中，你可以觀察到即便市場有波動，只要持續扣款，資產曲線最終都會趨向穩定成長。</p>
+
+                <div class="lab-task">
+                    <h4 class="font-black text-blue-600 text-lg mb-4 flex items-center">
+                        🛠️ 實驗室任務：驗證成本平滑效果
+                    </h4>
+                    <ul class="list-decimal list-inside space-y-2">
+                        <li>回到 <a href="index.html" class="tool-link">[DCA & Dividend Simulator]</a>。</li>
+                        <li>將「年化報酬率」設定為較保守的 5% - 7%。</li>
+                        <li>試著調整投資年限，觀察在 15 年以上的週期中，資產如何克服短期的波動，達成穩定的向上斜率。</li>
+                    </ul>
+                    <p class="mt-4 italic text-sm text-slate-500">投資不是比誰買得低，而是比誰買得久。</p>
+                </div>
+            </article>
+
+            <div class="divider"></div>
+
+            <article class="en-version">
+                <h2 class="text-2xl text-slate-700">How DCA Averages Your Costs</h2>
+                <br>
+                <h3>The Core Principle of Dollar-Cost Averaging (DCA)</h3>
+                <p class="mb-4">Dollar-Cost Averaging (DCA) is a straightforward yet powerful investment strategy. It involves investing a fixed amount of money at regular intervals (e.g., the 5th of every month) regardless of the market price. The essence of this strategy is "discipline" rather than "prediction."</p>
+                <p class="mb-4">During market fluctuations, the same dollar amount naturally buys fewer shares when prices are high and more shares when prices are low. Over time, your average cost per share tends to level out, effectively reducing the risk of investing a large sum at a market peak.</p>
+
+                <h3>Debunking the Myth of Market Timing</h3>
+                <p class="mb-4">Many investors try to find the "perfect" bottom (Market Timing). However, history shows that even professionals struggle to predict volatility accurately. Attempting to time the market often leads to two outcomes: fear of buying during a crash or anxiety over missing out during a rally. DCA eliminates this emotional stress by making your investments automatic and systematic.</p>
+
+                <h3>The Smile Curve: Why Dips are Your Friend</h3>
+                <p class="mb-4">In the world of DCA, we often talk about the "Smile Curve." Imagine a stock price that drops and then recovers. A lump-sum investor has to wait for the price to return to the original level just to break even. In contrast, a DCA investor accumulates a significant number of "cheap" shares during the dip (the bottom of the curve).</p>
+                <p class="mb-4">Consequently, when the price has only partially recovered, the DCA investor is often already in profit. For long-term investors, market pullbacks are not risks but opportunities to lower costs and accelerate wealth accumulation.</p>
+
+                <h3>The Long-term Success of DCA</h3>
+                <p class="mb-4">Based on historical data, the success rate of long-term DCA significantly outperforms frequent short-term trading. It ensures you "stay in the market," so you never miss out on major rallies. In our simulator, you can see that despite market volatility, consistent contributions lead to stable, long-term asset growth over time.</p>
+
+                <div class="lab-task border-slate-200">
+                    <h4 class="font-black text-slate-700 text-lg mb-4">🛠️ Lab Task: Verify the Cost-Averaging Effect</h4>
+                    <ul class="list-decimal list-inside space-y-2">
+                        <li>Return to the <a href="index.html" class="tool-link">[DCA & Dividend Simulator]</a>.</li>
+                        <li>Set the "Annual Return" to a conservative 5% - 7%.</li>
+                        <li>Adjust the "Investment Period" and observe how the asset curve overcomes short-term volatility to achieve a steady upward slope over 15+ years.</li>
+                    </ul>
+                    <p class="mt-4 italic text-sm text-slate-400">Investing isn't about buying at the lowest price; it's about staying in the market the longest.</p>
+                </div>
+            </article>
+
+<div class="mt-12 mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <a href="lesson1.html" class="flex items-center p-6 border border-slate-200 rounded-2xl hover:bg-blue-50 hover:border-blue-200 transition-all group shadow-sm">
+        <svg class="w-6 h-6 text-blue-600 group-hover:text-blue-600 group-hover:-translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <div class="flex flex-col flex-grow ml-4">
+            <span class="block text-xs text-slate-400 font-bold uppercase tracking-widest mb-1 group-hover:text-blue-500">Previous / 上一課</span>
+            <span class="text-sm font-bold text-slate-600 italic text-left group-hover:text-slate-900">The Magic of Compounding</span>
+            <span class="text-sm font-bold text-slate-600 italic text-left group-hover:text-slate-900">(第一課：複利的魔力)</span>
+        </div>
+    </a>
+
+    <a href="lesson3.html" class="flex items-center justify-between p-6 border border-slate-200 rounded-2xl hover:bg-blue-50 hover:border-blue-200 transition-all group shadow-sm">
+        <div class="flex flex-col flex-grow">
+            <span class="block text-xs text-slate-400 font-bold uppercase tracking-widest mb-1 group-hover:text-blue-500 text-right">Next / 下一課</span>
+            <span class="text-sm font-bold text-slate-600 italic text-right group-hover:text-slate-900">Frequency and Cash Flow</span>
+            <span class="text-sm font-bold text-slate-600 italic text-right group-hover:text-slate-900">(第三課：配息頻率與現金流規劃)</span>
+        </div>
+        <svg class="w-6 h-6 text-blue-600 group-hover:translate-x-2 transition-transform ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+    </a>
+</div>
+
+            <footer class="mt-24 border-t border-slate-200 py-16 text-center">
+    <p class="text-xs font-black text-slate-400 uppercase tracking-[0.5em] mb-4">Cashflow Navigation Lab</p>
+    
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+        <a href="about.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">關於我們 (About Us)</a>
+        <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">隱私權政策 (Privacy Policy)</a>
+        <a href="terms.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">使用條款 (Terms of Service)</a>
+    </div>
+
+    <p class="text-[10px] text-slate-400 max-w-4xl mx-auto px-4 italic leading-loose">
+        免責聲明：本模擬結果僅供參考，不代表未來獲利保證。投資必有風險，請諮詢專業顧問。<br>
+        Disclaimer: This simulation is for reference only and does not guarantee future profits. Investing involves risk.
+        <br>
+        <span class="mt-2 block not-italic">© 2026 CASHFLOW NAVIGATION LAB.</span>
+    </p>
+</footer>
+        </div>
+    </div>
+</body>
+</html>

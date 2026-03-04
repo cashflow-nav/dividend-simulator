@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academy - DCA & Dividend Simulator</title>
+    <meta name="description" content="Academy: Mastering compounding and long-term investment strategies. 存股教室：深入淺出學習複利、定期定額與長期投資策略。">
+    <title>DCA & Dividend Simulator - Academy 存股教室</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
@@ -13,7 +14,24 @@
         h3 { font-size: 1.3rem; font-weight: 900; color: #1e293b; margin-bottom: 0.75rem; display: flex; align-items: center; }
         h3::before { content: "•"; color: #3b82f6; margin-right: 0.5rem; font-size: 1.5rem; }
         .lang-section { margin-bottom: 4rem; }
-        .en-text { color: #64748b; font-size: 0.95rem; margin-top: 1rem; border-top: 1px dashed #e2e8f0; pt-4; }
+        .en-text { color: #64748b; font-size: 0.95rem; margin-top: 1rem; border-top: 1px dashed #e2e8f0; padding-top: 1rem; }
+        .read-more-btn { 
+            display: inline-block; 
+            margin-top: 1.5rem; 
+            padding: 0.5rem 1.5rem; 
+            background-color: #3b82f6; 
+            color: white; 
+            border-radius: 9999px; 
+            font-weight: 700; 
+            font-size: 0.875rem; 
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .read-more-btn:hover { 
+            background-color: #2563eb; 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); 
+        }
         article { margin-bottom: 2.5rem; }
         p { margin-bottom: 1rem; }
     </style>
@@ -22,6 +40,14 @@
     <div class="max-w-4xl mx-auto">
         
         <div class="glass-card p-8 md:p-12 shadow-xl">
+
+<div class="flex flex-wrap justify-end items-center gap-2 mb-6">
+        <a href="index.html" class="bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600 whitespace-nowrap">
+            Back to Tool / 回到工具
+        </a>
+        
+    </div>
+
             <h1 class="text-3xl md:text-4xl font-black text-slate-900 mb-10 italic uppercase tracking-tighter">
                 Stock <span class="text-blue-600">Academy</span>
                 <span class="block text-sm not-italic font-medium text-slate-400 mt-2">存股教室</span>
@@ -29,38 +55,55 @@
 
             <section class="lang-section">
                 <h2>1. The Magic of Compounding (第一課：複利的魔力與時間的關係)</h2>
-                <p class="font-bold">在投資的前 5 到 10 年，資產成長主要來自於您的本金投入。但隨著時間推移，利息產生的利息會呈現指數級增長。透過圖表，您可以觀察到長年投資後資產曲線的斜率會明顯變陡，這就是複利生效的「曲棍球桿效應」。</p>
-                <p class="en-text">In the first 5 to 10 years of investing, asset growth primarily comes from your principal. However, over time, the interest earned on interest grows exponentially. Through charts, you can observe the asset curve becoming significantly steeper—the "hockey stick effect" of compounding.</p>
+                <p class="font-bold">複利被譽為世界第八大奇蹟，其原理是將獲得的利息再投入本金，讓資產在後續週期產生連鎖反應。在存股過程中，只要給予足夠的時間，複利將從單純的加法演變為驚人的乘法運算。</p>
+                <p class="en-text">Compound interest is the "Eighth Wonder of the World." By reinvesting earnings to generate further gains, wealth evolves from simple addition into a powerful geometric progression over time.</p>
+                <a href="lesson1.html" class="read-more-btn">Read Full Lesson | 閱讀全文</a>
             </section>
 
             <section class="lang-section">
-                <h2>2. How DCA Averages Costs (第二課：定期定額 (DCA) 如何平均成本？)</h2>
-                <p class="font-bold">定期定額策略透過固定時間投入固定金額，在股市高位時買入較少股數，低位時買入較多股數。長期下來，持有成本會趨於平均。模擬假設投資者能克服心理波動，持之以恆地參與市場，這是達成模擬目標的核心前提。</p>
-                <p class="en-text">Dollar-Cost Averaging (DCA) involves investing a fixed amount at regular intervals, buying fewer shares when prices are high and more when prices are low. Over the long term, your holding cost tends to average out. This simulation assumes investors can overcome psychological volatility and participate consistently.</p>
+                <h2>2. How DCA Averages Costs (第二課：定期定額如何平滑成本？)</h2>
+                <p class="font-bold">定期定額 (DCA) 的核心在於「紀律」而非「預測」。透過在固定時間投入固定金額，這項策略能讓你在股價高位時買入較少股數、低位時自動買入較多股數，長期下來有效平滑持有成本，降低單筆買在最高點的風險。</p>
+                <p class="en-text">The essence of Dollar-Cost Averaging (DCA) is "discipline" rather than "prediction." By investing a fixed amount at regular intervals, you naturally buy fewer shares when prices are high and more when they are low, leveling out your average cost over the long term.</p>
+                <a href="lesson2.html" class="read-more-btn">Read Full Lesson | 閱讀全文</a>
             </section>
 
             <section class="lang-section">
-                <h2>3. Payout Frequency Patterns (第三課：理解配息頻率對現金流規律的影響)</h2>
-                <p class="font-bold">配息頻率（月配、季配、年配）主要影響的是現金流的「領取感」與「累積節奏」。在本模擬器的定期定額條件下，您可能會發現年配息標的的總資產成長略高，這是因為模型假設利息在期末以完整本金規模進行結算；而月配息標則提供了更即時的複利滾動與生活加薪感。投資者應根據需求選擇：追求穩定且頻繁的現金回流可關注月配商品；追求單次大規模結算則可參考年配標的。</p>
-                <p class="en-text">Payout frequency (Monthly, Quarterly, Annual) primarily affects the "reward sensation" and accumulation rhythm of your cash flow. Under DCA conditions in this simulator, you might notice slightly higher growth in annual payout assets because the model assumes interest is settled at the period-end with the full principal scale. Monthly payouts provide more immediate compounding and a sense of a "monthly raise." Investors should choose based on needs: focus on monthly products for stable, frequent cash flow; look at annual payouts for large, single settlements.</p>
+                <h2>3. Payout Frequency Patterns (第三課：配息頻率與現金流規劃)</h2>
+                <p class="font-bold">常見的配息頻率分為年配、季配與月配。雖然這僅是企業發放利潤時間點的不同，但對於投資者的心理狀態與資金調度卻有巨大的影響。理解不同頻率的特性，能幫助你選擇最適合自己生活節奏與財務需求的現金流模式。</p>
+                <p class="en-text">Dividend payout frequencies typically fall into three categories: Monthly, Quarterly, or Annually. While these simply represent different distribution schedules, they have a profound impact on an investor’s psychological state and capital management.</p>
+                <a href="lesson3.html" class="read-more-btn">Read Full Lesson | 閱讀全文</a>
             </section>
 
             <section class="lang-section">
-                <h2>4. The Boring Middle (第四課：克服「無感中期」的心理關卡)</h2>
-                <p class="font-bold">在 20 年的存股計畫中，最難熬的往往是第 7 到 12 年。此時本金累積到一定程度，但複利增長還未產生爆炸性視覺效果。理解這個「成長高原期」是避免中途放棄、確保計畫成功的關鍵。</p>
-                <p class="en-text">The most difficult part of a 20-year DCA plan isn't the start or the end—it's the middle. Years 7 through 12 often feel slow because your contributions are large relative to your current gains. Understanding this plateau is key to not quitting before the compounding curve takes off.</p>
+               <h2>4. The Boring Middle (第四課：存股最難的一段路—如何克服「無感高原期」)</h2>
+               <p class="font-bold">投資存股最危險的階段通常在進入第 7 到第 12 年時，我們稱之為「無感高原期」。此時你已累積了一定的本金，但複利的爆發力尚未顯現，資產成長感的遞減最考驗意志力。理解這段枯燥期，是確保長期計畫成功的關鍵。</p>
+               <p class="en-text">The most dangerous phase of dividend investing is often the "Boring Middle" (years 7 to 12). At this stage, you have accumulated significant principal, yet the explosive power of compounding has yet to truly kick in, making psychological endurance essential for success.</p>
+               <a href="lesson4.html" class="read-more-btn">Read Full Lesson | 閱讀全文</a>
             </section>
 
             <section class="lang-section">
-                <h2>5. Risk and Reinvestment (第五課：風險管理與再投資的紀律)</h2>
-                <p class="font-bold">配息並非保證。一個穩健的策略應分散在不同頻率的標的。請記住，本工具顯示的「總資產」是建立在「100% 股息再投資」的前提下；一旦您開始將股息領出消費，複利的斜率將會顯著降低。</p>
-                <p class="en-text">Dividends are not guaranteed. A robust strategy involves diversifying across different frequencies to ensure a smooth cash flow. Always remember that the "Total Asset" shown in this tool assumes 100% dividend reinvestment—the moment you start spending those dividends, the compounding slope will decrease.</p>
+               <h2>5. Risk and Reinvestment (第五課：再投資的紀律與風險管理)</h2>
+               <p class="font-bold">股息再投資 (DRIP) 是決定複利曲線能否從「線性成長」轉為「指數成長」的決定性因素。透過將收到的股息立即買回標的，你將啟動持股數不斷增加的財富螺旋。此外，正視分散投資與預備金等風險管理，更是長線投資的穩健基石。</p>
+               <p class="en-text">Dividend Reinvestment (DRIP) is the decisive factor in shifting your compounding curve from linear to exponential growth. By immediately purchasing more shares with your dividends, you create a powerful wealth spiral. Understanding risk management is equally essential for long-term stability.</p>
+               <a href="lesson5.html" class="read-more-btn">Read Full Lesson | 閱讀全文</a>
             </section>
 
-            <footer class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-slate-400 font-bold uppercase tracking-widest">Financial Education Series</p>
-                <p class="text-xs text-slate-400 italic">© CASHFLOW NAVIGATION LAB</p>
-            </footer>
+            <footer class="mt-24 border-t border-slate-200 py-16 text-center">
+    <p class="text-xs font-black text-slate-400 uppercase tracking-[0.5em] mb-4">Cashflow Navigation Lab</p>
+    
+    <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+        <a href="about.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">關於我們 (About Us)</a>
+        <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">隱私權政策 (Privacy Policy)</a>
+        <a href="terms.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black">使用條款 (Terms of Service)</a>
+    </div>
+
+    <p class="text-[10px] text-slate-400 max-w-4xl mx-auto px-4 italic leading-loose">
+        免責聲明：本模擬結果僅供參考，不代表未來獲利保證。投資必有風險，請諮詢專業顧問。<br>
+        Disclaimer: This simulation is for reference only and does not guarantee future profits. Investing involves risk.
+        <br>
+        <span class="mt-2 block not-italic">© 2026 CASHFLOW NAVIGATION LAB.</span>
+    </p>
+</footer>
         </div>
     </div>
 </body>
