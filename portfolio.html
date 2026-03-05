@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-88CGD6LMRG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-88CGD6LMRG');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="canonical" href="https://dcadivsim.com/portfolio.html" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <title>DCA & Dividend Simulator - Portfolio Tracker 實戰資產盤點 / 股息領取清單</title>
+    <meta name="description" content="Professional Portfolio Tracker. Manage your holdings and track annual dividends. 最直覺的資產盤點工具，精確計算持股總額與預估年領股利。">
+    <meta name="keywords" content="資產盤點, 存股清單, 股息計算, Portfolio Tracker, Dividend Tracker, 投資組合管理, 財務自由, 被動收入, 領息記錄">
+    
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Portfolio Tracker - 實戰資產盤點">
+    <meta property="og:description" content="Manage your holdings and track annual dividends. 精確計算持股總額與預估年領股利。">
+    <meta property="og:image" content="https://dcadivsim.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    
+    <link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/portfolio.html?lang=zh" />
+    <link rel="alternate" hreflang="en" href="https://dcadivsim.com/portfolio.html?lang=en" />
+
+    <style>
+                
+        body { 
+            font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif; 
+            background-color: #f1f5f9; 
+            color: #1e293b; 
+            scroll-behavior: smooth; 
+            -webkit-font-smoothing: antialiased;
+            font-display: swap; 
+        }
+        .glass-card { background: white; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .table-container { max-height: 70vh; overflow: auto; border-radius: 1.5rem; }
+        th { position: sticky; top: 0; z-index: 10; background: #f8fafc; }
+        #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 800px; z-index: 1000; display: none; }
+        .input-clean { background: transparent; font-weight: 900; width: 100%; outline: none; border-bottom: 2px solid transparent; transition: all 0.2s; }
+        .input-clean:focus { border-bottom-color: #2563eb; }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+</head>
+
+<body class="p-4 md:p-8">
+    <div id="cookie-banner" class="glass-card p-6 border-t-4 border-t-blue-600 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xl">
+        <p class="text-[10px] md:text-xs font-bold text-slate-600 i18n" data-key="cookie_text"></p>
+        <button onclick="acceptCookies()" class="bg-blue-600 text-white px-8 py-2 rounded-full text-[10px] font-black uppercase whitespace-nowrap hover:bg-blue-700 transition-colors i18n" data-key="cookie_btn"></button>
+    </div>
+
+    <div class="max-w-7xl mx-auto">
+        <header class="mb-10 border-b border-slate-200 pb-8">
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-6 mb-8">
+                <div class="flex-shrink-0 text-center lg:text-left">
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-black italic tracking-tighter text-slate-900 whitespace-nowrap">
+                        DCA & <span class="text-blue-600">Dividend</span> 
+                        <span class="text-slate-400 not-italic ml-1 text-xl md:text-2xl font-normal">Simulator</span>
+                    </h1>
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1">Cashflow Navigation Lab</p>
+                </div>
+                <div class="flex flex-wrap justify-center md:justify-end items-center gap-2">
+                    <a href="about.html" target="_blank" rel="noopener noreferrer" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600" data-key="nav_about"></a>
+                    <a href="academy.html" target="_blank" rel="noopener noreferrer" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600" data-key="nav_edu"></a>
+                    <button onclick="toggleLang()" class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black hover:bg-blue-600 transition-all uppercase whitespace-nowrap">中文 / EN</button>
+                </div>
+            </div>
+
+            <nav class="grid grid-cols-3 gap-2 p-1.5 bg-slate-100 rounded-[1.5rem] max-w-4xl mx-auto lg:mx-0">
+    <a href="index.html" class="flex items-center justify-center gap-2 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_compound">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+            <line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>
+        </svg>
+        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_compound">複利試算</span>
+    </a>
+    <a href="goal.html" class="flex items-center justify-center gap-2 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_goal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_goal">目標計算機</span>
+    </a>
+    <a href="portfolio.html" class="flex items-center justify-center gap-2 bg-white text-blue-600 py-4 rounded-[1.25rem] shadow-sm ring-1 ring-slate-200 transition-all" data-aria-key="nav_portfolio">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_portfolio">實戰盤點</span>
+    </a>
+</nav>
+        </header>
+
+        <section class="mb-8">
+            <div class="glass-card p-6 border-l-4 border-l-blue-600">
+                <h2 class="text-lg font-black text-slate-900 mb-2 i18n" data-key="intro_title"></h2>
+                <p class="text-sm text-slate-500 font-medium leading-relaxed i18n" data-key="intro_desc"></p>
+            </div>
+        </section>
+
+        <main class="space-y-12">
+
+<div class="flex justify-end -mb-8 px-2">
+        <div class="glass-card px-4 py-2 flex items-center gap-3 border-blue-200 shadow-sm">
+            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest i18n" data-key="rate_label"></span>
+            <input type="number" id="exchangeRate" value="32" oninput="calculateSummary()" 
+                   class="w-16 bg-transparent font-black text-blue-600 outline-none text-right border-b border-transparent focus:border-blue-600">
+            <span class="text-[10px] font-black text-slate-400">TWD</span>
+        </div>
+    </div>
+
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="glass-card p-6 border-t-4 border-t-blue-500 shadow-sm text-center">
+        <label class="block text-base font-black text-slate-400 uppercase tracking-widest mb-2 i18n" data-key="summary_annual"></label>
+        <div class="text-2xl font-black text-slate-900"><span id="totalAnnual">0</span></div>
+    </div>
+    
+    <div class="glass-card p-6 border-t-4 border-t-indigo-500 shadow-sm text-center">
+        <label class="block text-base font-black text-slate-400 uppercase tracking-widest mb-2 i18n" data-key="summary_monthly"></label>
+        <div class="text-2xl font-black text-slate-900"><span id="totalMonthly">0</span></div>
+    </div>
+</section>
+
+<section id="chartSection" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12 hidden">
+    <div class="lg:col-span-2 glass-card p-6 flex flex-col items-center justify-center min-h-[350px]">
+        <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 i18n" data-key="chart_source"></h3>
+        <div class="relative w-full h-[300px]">
+            <canvas id="sourceChart"></canvas>
+        </div>
+    </div>
+    <div class="lg:col-span-1 glass-card p-6 flex flex-col items-center justify-center min-h-[350px]">
+        <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 i18n" data-key="chart_currency"></h3>
+        <div class="relative w-full h-[300px]">
+            <canvas id="currencyChart"></canvas>
+        </div>
+    </div>
+</section>
+
+            <section class="bg-white border border-slate-200 rounded-[2.5rem] p-4 md:p-8 shadow-sm overflow-hidden">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 px-4 gap-6">
+                    <h2 class="text-sm font-black uppercase tracking-[0.2em] text-slate-800 i18n" data-key="tracker_title"></h2>
+                    <button onclick="addRow()" class="bg-blue-600 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-blue-700 transition-all">+ Add Stock</button>
+                </div>
+
+<div class="px-4 mb-4 text-left">
+    <div class="inline-flex items-baseline gap-1 font-black">
+        <span id="stockCount" class="text-orange-600 text-base">0</span>
+        
+        <span class="i18n text-slate-400 text-[10px] font-bold uppercase tracking-wide" data-key="unit_stocks"></span>
+    </div>
+</div>
+
+                <div class="table-container border border-slate-100">
+                    <table class="w-full border-collapse">
+                        <thead class="hidden md:table-header-group">
+    <tr class="bg-slate-50">
+        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_symbol"></th>
+        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_shares"></th>
+        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_div"></th>
+        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_freq"></th>
+        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_total"></th>
+        <th class="p-4"></th>
+    </tr>
+</thead>
+                        <tbody id="portfolioBody" class="text-xs"></tbody>
+                    </table>
+                </div>
+                <div class="mt-8 text-center">
+                    <button onclick="clearData()" class="text-[10px] font-black text-slate-300 uppercase tracking-widest hover:text-red-500 transition-colors i18n" data-key="btn_clear"></button>
+                </div>
+            </section>
+
+            <section class="mt-24">
+                <div class="glass-card p-8 md:p-12 bg-white">
+                    <h2 class="text-3xl font-black text-slate-900 mb-8 border-l-8 border-blue-600 pl-6 italic uppercase i18n" data-key="logic_title"></h2>
+                    <div id="logicContent" class="grid grid-cols-1 md:grid-cols-2 gap-12 text-slate-600 leading-relaxed text-sm md:text-base">
+                        </div>
+                </div>
+            </section>
+
+            <section class="mt-24 border-t border-slate-200 pt-16">
+                <div class="bg-slate-900 p-8 md:p-12 rounded-[2rem] text-white flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div>
+                        <h3 class="text-2xl font-black italic mb-2 i18n" data-key="contact_title"></h3>
+                        <p class="text-slate-400 text-sm i18n" data-key="contact_desc"></p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Official Support</p>
+                        <a href="mailto:service@dcadivsim.com" class="text-xl md:text-2xl font-black hover:text-blue-400 transition-colors">service@dcadivsim.com</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-24 border-t border-slate-200 py-16 text-center">
+            <p class="text-xs font-black text-slate-400 uppercase tracking-[0.5em] mb-4">Cashflow Navigation Lab</p>
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+                <a href="about.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="about_link"></a>
+                <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="privacy_link"></a>
+                <a href="terms.html" target="_blank" rel="noopener noreferrer" class="text-[10px] text-blue-600 hover:underline uppercase font-black i18n" data-key="terms_link"></a>
+            </div>
+            <p class="text-[10px] text-slate-400 max-w-2xl mx-auto px-4 italic leading-loose i18n" data-key="disclaimer"></p>
+        </footer>
+    </div>
+
+    <script>
+        // 腳本邏輯完全對齊 Goal.html 規範
+        let currentLang = 'en';
+        let stocks = [];
+        let debounceTimer;
+        let rateDebounceTimer;
+        let sourceChart = null;
+        let currencyChart = null;
+
+        const langData = {
+            zh: {
+                nav_compound: "複利試算", nav_goal: "目標計算機", nav_portfolio: "實戰盤點",
+                nav_about: "關於我們", nav_edu: "存股教室",
+                intro_title: "實戰資產盤點工具",
+                intro_desc: "記錄您的持股清單與配息狀況。這份資料將加密儲存在您的瀏覽器中，方便隨時追蹤您的被動收入達成進度。你可以隨時拉動清單上的表格順序，讓你的持股清單更加有條理。",
+                summary_annual: "預估年領股利", summary_monthly: "平均月領股利",
+                summary_count: "持股總數", unit_stocks: "支股票",
+                rate_label: "參考匯率 1 USD =",
+                summary_total_all: "折合總計",
+                tracker_title: "我的資產清單",
+                th_symbol: "代碼/名稱", th_shares: "持有股數", th_div: "配息/次", th_freq: "次數/年", th_total: "年領總計",
+                btn_clear: "清空所有資料",
+                logic_title: "盤點演算邏輯",
+                logic_html: `
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">1. 被動收入精確估算</p>
+                        <p>本工具採用「單一資產年化配息公式」，將您的持股數量乘以每期配息金額，再經由年配發頻率校正，算出最接近真實狀況的年度現金流預估。</p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 font-mono text-xs text-slate-500">
+                            公式: Annual Dividend = Shares * Dividend_Per_Payout * Frequency
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">2. 隱私安全與本地化儲存</p>
+                        <p>您的所有持股數據僅儲存在您個人的瀏覽器 LocalStorage 中，本站伺服器不會紀錄任何資產內容。這確保了高度隱私性，同時讓您下次開啟網頁時能即時更新數據。</p>
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 text-blue-900 italic font-medium">「釐清現狀，是通往財富自由的第一步。」</div>
+                    </div>`,
+                contact_title: "聯繫與支援",
+                contact_desc: "若有任何問題、建議或錯誤回報，歡迎透過官方郵件聯繫。",
+                about_link: "關於我們 (About)", privacy_link: "隱私權政策 (Privacy)", terms_link: "使用條款 (Terms)",
+                disclaimer: "免責聲明：本模擬結果僅供參考，不代表未來獲利保證。投資必有風險，請諮詢專業顧問。 © 2026 CASHFLOW NAVIGATION LAB.",
+                cookie_text: "本網站使用 Cookie 以提升用戶體驗與分析流量。點擊「同意」代表您接受我們的隱私權條款。",
+                cookie_btn: "同意並關閉",
+                th_currency: "幣別",
+                summary_total_by: "總計 (按幣別)",
+                chart_source: "年領股利來源分配",
+                chart_currency: "幣別配置佔比",
+            },
+            en: {
+                nav_compound: "DCA & DIV SIM", nav_goal: "Goal Planner", nav_portfolio: "Portfolio",
+                nav_about: "About", nav_edu: "Academy",
+                intro_title: "Portfolio Tracker",
+                intro_desc: "Keep track of your holdings and dividends. Data is stored locally in your browser for your privacy and convenience. You can reorder the table at any time by dragging rows to keep your portfolio organized.",
+                summary_annual: "Est. Annual Div", summary_monthly: "Avg. Monthly Div",
+                summary_count: "Total Holdings", unit_stocks: "Stocks",
+                rate_label: "Rate 1 USD =",
+                summary_total_all: "Total Est.",
+                tracker_title: "Asset List",
+                th_symbol: "Symbol", th_shares: "Shares", th_div: "Div/Payout", th_freq: "Freq/Year", th_total: "Annual Total",
+                btn_clear: "Clear All Data",
+                logic_title: "Tracking Logic",
+                logic_html: `
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">1. Cashflow Estimation</p>
+                        <p>We calculate your expected annual income by normalizing payout frequencies. This provides a clear picture of your passive income stream across different assets.</p>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 font-mono text-xs text-slate-500">
+                            Ref: Annual Dividend = Shares * Dividend_Per_Payout * Frequency
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <p class="font-bold text-slate-800 text-lg">2. Privacy First Storage</p>
+                        <p>All data is stored in your browser's LocalStorage. We do not track or store your financial information on our servers, ensuring 100% privacy.</p>
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 text-blue-900 italic font-medium">"Knowing where you stand is the first step to financial freedom."</div>
+                    </div>`,
+                contact_title: "Contact & Support",
+                contact_desc: "For inquiries, suggestions, or bug reports, please reach out via our official email.",
+                about_link: "About Us", privacy_link: "Privacy Policy", terms_link: "Terms of Service",
+                disclaimer: "Disclaimer: This simulation is for reference only and does not guarantee future profits. Investing involves risk. © 2026 CASHFLOW NAVIGATION LAB.",
+                cookie_text: "We use cookies to improve experience. By continuing, you agree to our policies.",
+                cookie_btn: "Accept & Close",
+                th_currency: "Currency",
+                summary_total_by: "Total (by Currency)",
+                chart_source: "ANNUAL DIVIDEND SOURCE",
+                chart_currency: "CURRENCY ALLOCATION"
+            }
+        };
+
+        function applyLang() {
+            document.documentElement.lang = currentLang;
+            document.querySelectorAll('.i18n').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (key && langData[currentLang][key]) el.innerText = langData[currentLang][key];
+                
+                const ariaKey = el.getAttribute('data-aria-key');
+                if (ariaKey && langData[currentLang][ariaKey]) el.setAttribute('aria-label', langData[currentLang][ariaKey]);
+            });
+
+            document.querySelectorAll('nav a, footer a').forEach(link => {
+                const hrefAttr = link.getAttribute('href');
+                if (hrefAttr) {
+                    const baseHref = hrefAttr.split('?')[0];
+                    link.setAttribute('href', `${baseHref}?lang=${currentLang}`);
+                }
+            });
+            document.getElementById('logicContent').innerHTML = langData[currentLang].logic_html;
+            renderTable();
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            applyLang();
+            calculateSummary();
+        }
+
+        function addRow(data = { symbol: '', shares: 0, div: 0, freq: 1, currency: 'TWD' }) {
+    const id = Date.now();
+    stocks.push({ id, ...data });
+    saveAndRender();
+
+    setTimeout(() => {
+        const container = document.querySelector('.table-container');
+        if (container) {
+            container.scrollTo({
+                top: container.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+    }, 10);
+}
+
+        function removeRow(id) {
+    stocks = stocks.filter(s => s.id !== id);
+    
+    // 修正：刪除後立刻強行寫入記憶體，不進排隊隊列
+    localStorage.setItem('userPortfolio', JSON.stringify(stocks));
+    
+    if (stocks.length === 0) {
+        addRow();
+    } else {
+        renderTable();
+        calculateSummary();
+    }
+}
+
+function updateStock(id, field, value) {
+    const stock = stocks.find(s => s.id === id);
+    if (stock) {
+        // 1. 確保數據立即寫入記憶體
+        if (field === 'symbol') {
+            stock[field] = value.toUpperCase();
+        } else if (field === 'currency') {
+            stock[field] = value;
+            // 幣別改變必須重繪表格，以正確顯示按鈕選取狀態與格式
+            renderTable(); 
+        } else {
+            stock[field] = Math.max(0, parseFloat(value) || 0);
+        }
+
+        // 2. 立即更新該列的顯示數字
+        const totalCell = document.getElementById(`total-${id}`);
+        if (totalCell) {
+            const rowTotal = stock.shares * stock.div * stock.freq;
+            const currencySymbol = stock.currency === 'USD' ? 'US$' : 'NT$';
+            const formattedValue = stock.currency === 'USD'
+                ? rowTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})
+                : Math.round(rowTotal).toLocaleString();
+            
+            const span = totalCell.querySelector('span.text-base.md\\:text-xs');
+            if (span) {
+                span.textContent = `${currencySymbol}${formattedValue}`;
+            }
+        }
+
+        // 3. 不管修改什麼欄位，都進入防抖隊列更新存檔與圖表
+        clearTimeout(debounceTimer);
+debounceTimer = setTimeout(() => {
+    localStorage.setItem('userPortfolio', JSON.stringify(stocks));
+}, 500);
+
+// 把計算放外面，這樣你打字時，上面的總金額數字會即時跳動，不用等 0.5 秒
+calculateSummary();
+    }
+}
+
+        function saveAndRender() {
+            // 修改後：存檔動作加入防抖
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                localStorage.setItem('userPortfolio', JSON.stringify(stocks));
+            }, 500);
+
+            renderTable();
+            calculateSummary();
+        }
+
+        function calculateSummary() {
+    const totals = { TWD: 0, USD: 0 }; 
+    const rate = parseFloat(document.getElementById('exchangeRate').value) || 32;
+
+    // 1. 分別加總不同幣別的年領股利
+    stocks.forEach(s => {
+        const curr = s.currency || 'TWD';
+        const annual = s.shares * s.div * s.freq;
+        if (totals.hasOwnProperty(curr)) totals[curr] += annual;
+    });
+
+    // 2. 計算兩種幣別的總換算值
+    const allInTWD = totals.TWD + (totals.USD * rate);
+    const allInUSD = totals.USD + (totals.TWD / rate);
+    
+    // 修改後：將儲存邏輯移至防抖區塊
+    
+    
+        localStorage.setItem('userExchangeRate', rate);
+    
+
+    const annualEl = document.getElementById('totalAnnual');
+    const monthlyEl = document.getElementById('totalMonthly');
+
+    if (stocks.length === 0) {
+        annualEl.innerText = "0";
+        monthlyEl.innerText = "0";
+    } else {
+        
+        const createResultHTML = (usdRaw, twdRaw, totalTwd, totalUsd, label) => `
+    <div class="text-xl text-red-400 font-bold mb-2 uppercase">
+        USD ${usdRaw.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} + TWD ${Math.round(twdRaw).toLocaleString()}
+    </div>
+    <div class="flex flex-col gap-1 items-center">
+        <div class="text-base font-bold text-slate-500 uppercase tracking-widest opacity-80">${label}</div>
+        <div class="text-xl md:text-2xl font-black text-blue-600">
+           ≈ NT$ ${Math.round(totalTwd).toLocaleString()}
+        </div>
+        <div class="text-xl md:text-2xl font-black text-slate-900">
+           ≈ US$ ${totalUsd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+        </div>
+    </div>
+`;
+
+        // 4. 渲染年領卡片 (帶入年加總數據)
+        annualEl.innerHTML = createResultHTML(
+            totals.USD, 
+            totals.TWD, 
+            allInTWD, 
+            allInUSD, 
+            langData[currentLang].summary_total_all
+        );
+        
+        // 5. 渲染月領卡片 (帶入年加總除以 12 的數據)
+        monthlyEl.innerHTML = createResultHTML(
+            totals.USD / 12, 
+            totals.TWD / 12, 
+            allInTWD / 12, 
+            allInUSD / 12, 
+            langData[currentLang].summary_total_all
+        );
+    }
+    document.getElementById('stockCount').innerText = stocks.length;
+updateCharts(totals, rate);
+}
+
+function updateCharts(totals, rate) {
+    const chartSec = document.getElementById('chartSection');
+    if (stocks.length === 0) {
+        chartSec.classList.add('hidden');
+        return;
+    }
+    chartSec.classList.remove('hidden');
+
+    // 1. 處理數據
+    let sourceData = stocks.map(s => ({
+        label: s.symbol || 'Unknown',
+        value: (s.shares * s.div * s.freq) * (s.currency === 'USD' ? rate : 1)
+    })).filter(d => d.value > 0).sort((a, b) => b.value - a.value);
+
+    if (sourceData.length > 8) {
+        const others = sourceData.slice(8).reduce((acc, curr) => acc + curr.value, 0);
+        sourceData = sourceData.slice(0, 8);
+        sourceData.push({ label: currentLang === 'zh' ? '其他' : 'Others', value: others });
+    }
+
+    // 2. 定義完整的百分比顯示邏輯
+    const chartPlugins = {
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: { weight: 'bold', size: 10 } } },
+        tooltip: {
+            callbacks: {
+                label: function(context) {
+                    const value = context.parsed || 0;
+                    const dataset = context.dataset.data;
+                    const total = dataset.reduce((a, b) => a + b, 0);
+                    const percentage = total > 0 ? ((value / total) * 100).toFixed(1) + '%' : '0%';
+                    return `${context.label}: ${percentage}`;
+                }
+            }
+        }
+    };
+
+    // 3. 更新或建立 Source Chart
+    if (sourceChart) {
+        sourceChart.data.labels = sourceData.map(d => d.label);
+        sourceChart.data.datasets[0].data = sourceData.map(d => d.value);
+        sourceChart.options.plugins = chartPlugins; // 重新注入插件配置確保百分比正確
+        sourceChart.update();
+    } else {
+        const ctxSource = document.getElementById('sourceChart').getContext('2d');
+        sourceChart = new Chart(ctxSource, {
+            type: 'doughnut',
+            data: {
+                labels: sourceData.map(d => d.label),
+                datasets: [{
+                    data: sourceData.map(d => d.value),
+                    backgroundColor: ['#2563eb', '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f97316', '#eab308', '#22c55e', '#94a3b8'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: chartPlugins,
+                cutout: '60%'
+            }
+        });
+    }
+
+    // 4. 更新或建立 Currency Chart
+    if (currencyChart) {
+        currencyChart.data.datasets[0].data = [totals.TWD, totals.USD * rate];
+        currencyChart.options.plugins = chartPlugins;
+        currencyChart.update();
+    } else {
+        const ctxCurr = document.getElementById('currencyChart').getContext('2d');
+        currencyChart = new Chart(ctxCurr, {
+            type: 'pie',
+            data: {
+                labels: ['TWD', 'USD'],
+                datasets: [{
+                    data: [totals.TWD, totals.USD * rate],
+                    backgroundColor: ['#334155', '#2563eb'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: chartPlugins
+            }
+        });
+    }
+}
+
+        let lastRenderedData = ""; // 緩存上次渲染的字符串
+
+function renderTable() {
+    const body = document.getElementById('portfolioBody');
+    // 渲染前預處理：將 stocks 轉為簡化字符串比對，避免無意義渲染
+    const currentDataState = JSON.stringify(stocks.map(s => ({id: s.id, cur: s.currency})));
+    
+    // 如果只有數值變動（updateStock 會處理局部更新），就不需要重新 map 全表
+    // 這裡我們只在「結構性改變」（刪除、新增、切換幣別）時才全量 render
+    const rowsHtml = stocks.map(s => {
+        const currencySymbol = s.currency === 'USD' ? 'US$' : 'NT$';
+        const rowTotal = s.shares * s.div * s.freq;
+        const displayTotal = s.currency === 'USD' 
+            ? rowTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})
+            : Math.round(rowTotal).toLocaleString();
+
+        return `
+        <tr class="cursor-move flex flex-col md:table-row border-2 border-slate-100 md:border-0 md:border-b md:border-slate-50 hover:bg-slate-50 transition-colors p-5 mb-6 md:mb-0 rounded-[2rem] md:rounded-none relative bg-white shadow-sm md:shadow-none">
+            <td class="md:hidden p-0 w-full flex justify-end">
+                <button onclick="removeRow(${s.id})" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-50 text-slate-400 font-bold border border-slate-100 active:scale-90 transition-all shadow-sm mb-1">✕</button>
+            </td>
+            <td class="p-2 md:p-4 md:border-r border-slate-100">
+                <div class="flex flex-col gap-1">
+                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">${langData[currentLang].th_symbol}</span>
+                    <div class="flex flex-row items-center gap-2 w-full">
+                        <input class="input-clean text-left text-lg md:text-xs flex-1 min-w-[80px] uppercase" value="${s.symbol}" oninput="updateStock(${s.id}, 'symbol', this.value)" placeholder="e.g. AAPL">
+                        <div class="flex items-center bg-slate-100 p-0.5 rounded-full border border-slate-200/50 shrink-0">
+                            <button onclick="updateStock(${s.id}, 'currency', 'TWD')" class="px-2 py-0.5 rounded-full text-[9px] font-black transition-all ${(!s.currency || s.currency === 'TWD') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">TWD</button>
+                            <button onclick="updateStock(${s.id}, 'currency', 'USD')" class="px-2 py-0.5 rounded-full text-[9px] font-black transition-all ${s.currency === 'USD' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">USD</button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="p-2 md:p-4 md:border-r border-slate-100">
+                <div class="flex justify-between items-center md:block">
+                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_shares}</span>
+                    <input type="number" min="0" class="input-clean text-right md:text-left max-w-[150px] md:max-w-none" value="${s.shares}" oninput="updateStock(${s.id}, 'shares', this.value)">
+                </div>
+            </td>
+            <td class="p-2 md:p-4 md:border-r border-slate-100">
+                <div class="flex justify-between items-center md:block">
+                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_div}</span>
+                    <input type="number" min="0" step="any" class="input-clean text-right md:text-left max-w-[150px] md:max-w-none" value="${s.div}" oninput="updateStock(${s.id}, 'div', this.value)">
+                </div>
+            </td>
+            <td class="p-2 md:p-4 md:border-r border-slate-100">
+                <div class="flex justify-between items-center md:block">
+                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_freq}</span>
+                    <select onchange="updateStock(${s.id}, 'freq', this.value)" class="bg-transparent font-black text-slate-700 outline-none text-right md:text-left border-b-2 border-transparent focus:border-blue-600">
+                        <option value="1" ${s.freq == 1 ? 'selected' : ''}>1</option>
+                        <option value="2" ${s.freq == 2 ? 'selected' : ''}>2</option>
+                        <option value="4" ${s.freq == 4 ? 'selected' : ''}>4</option>
+                        <option value="12" ${s.freq == 12 ? 'selected' : ''}>12</option>
+                    </select>
+                </div>
+            </td>
+            <td id="total-${s.id}" class="p-4 md:border-r border-slate-100 font-black text-blue-600 bg-blue-50/50 md:bg-transparent rounded-2xl md:rounded-none mt-4 md:mt-0">
+                <div class="flex justify-between items-center md:block">
+                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">${langData[currentLang].th_total}</span>
+                    <span class="text-base md:text-xs">${currencySymbol}${displayTotal}</span>
+                </div>
+            </td>
+            <td class="hidden md:table-cell p-4 text-center">
+                <button onclick="removeRow(${s.id})" class="text-slate-300 hover:text-red-500 font-bold transition-colors">✕</button>
+            </td>
+        </tr>`;
+    }).join('');
+
+    if (body.innerHTML !== rowsHtml) {
+        body.innerHTML = rowsHtml;
+    }
+}
+
+        function clearData() {
+            const msg = currentLang === 'zh' ? '確定要清空所有資料嗎？' : 'Are you sure you want to clear all data?';
+            if(confirm(msg)) { 
+                // 1. 先清除正在排隊的防抖計時器，防止舊資料覆蓋回來
+                clearTimeout(debounceTimer); 
+                // 2. 清空陣列
+                stocks = []; 
+                // 3. 立即強制寫入 LocalStorage，不等待 500ms
+                localStorage.setItem('userPortfolio', JSON.stringify(stocks)); 
+                // 4. 更新畫面與圖表
+                saveAndRender(); 
+            }
+        }
+
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('cookieAccepted', 'true');
+        }
+
+        window.onload = function() {
+    if (!localStorage.getItem('cookieAccepted')) document.getElementById('cookie-banner').style.display = 'flex';
+    
+    // ... (語言判斷邏輯保持不變) ...
+    const urlParams = new URLSearchParams(window.location.search);
+    const langParam = urlParams.get('lang');
+    if (langParam && (langParam === 'zh' || langParam === 'en')) {
+        currentLang = langParam;
+    } else {
+        const userLang = navigator.language || navigator.userLanguage; 
+        currentLang = userLang.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+    }
+
+    const saved = localStorage.getItem('userPortfolio');
+    if (saved) stocks = JSON.parse(saved);
+
+    const savedRate = localStorage.getItem('userExchangeRate');
+    if (savedRate) document.getElementById('exchangeRate').value = savedRate;
+
+    if (stocks.length === 0) addRow();
+
+    // --- 新增拖拽初始化 ---
+    const el = document.getElementById('portfolioBody');
+    if (el) {
+        Sortable.create(el, {
+            animation: 150, // 拖拽時的動畫速度 (ms)
+            ghostClass: 'bg-blue-50', // 拖動時原本位置的樣式
+            onEnd: function () {
+                // 當拖拽結束時，重新對齊記憶體中的 stocks 順序
+                const newOrderIds = Array.from(el.querySelectorAll('tr')).map(tr => {
+                    // 我們需要從 id="total-123" 這種格式中提取出純數字 ID
+                    const totalId = tr.querySelector('[id^="total-"]').id;
+                    return parseInt(totalId.replace('total-', ''));
+                });
+
+                // 根據 DOM 的新順序重排 stocks 陣列
+                stocks = newOrderIds.map(id => stocks.find(s => s.id === id));
+
+                // 存檔並更新圖表 (不重繪表格，避免閃爍)
+                localStorage.setItem('userPortfolio', JSON.stringify(stocks));
+                calculateSummary(); 
+            },
+        });
+    }
+
+    applyLang();
+    calculateSummary();
+};
+    </script>
+</body>
+</html>

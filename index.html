@@ -85,16 +85,26 @@
         </div>
     </div>
 
-    <nav class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-[1.5rem] max-w-3xl mx-auto lg:mx-0">
-        <a href="index.html" class="flex items-center justify-center gap-3 bg-white text-blue-600 py-4 rounded-[1.25rem] shadow-sm ring-1 ring-slate-200 transition-all" data-aria-key="nav_compound">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-            <span class="text-base md:text-lg font-black uppercase tracking-tight i18n" data-key="nav_compound">複利試算</span>
-        </a>
-        <a href="goal.html" class="flex items-center justify-center gap-3 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_goal">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span class="text-base md:text-lg font-black uppercase tracking-tight i18n" data-key="nav_goal">目標計算機</span>
-        </a>
-    </nav>
+    <nav class="grid grid-cols-3 gap-2 p-1.5 bg-slate-100 rounded-[1.5rem] max-w-4xl mx-auto lg:mx-0">
+    <a href="index.html" class="flex items-center justify-center gap-2 bg-white text-blue-600 py-4 rounded-[1.25rem] shadow-sm ring-1 ring-slate-200 transition-all" data-aria-key="nav_compound">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+            <line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>
+        </svg>
+        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_compound">複利試算</span>
+    </a>
+    <a href="goal.html" class="flex items-center justify-center gap-2 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_goal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_goal">目標計算機</span>
+    </a>
+    <a href="portfolio.html" class="flex items-center justify-center gap-2 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_portfolio">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_portfolio">實戰盤點</span>
+    </a>
+</nav>
 </header>
 
         <section class="mb-8">
@@ -237,7 +247,7 @@
         let currentLang = 'en';
         const langData = {
             zh: {
-                nav_compound: "複利試算", nav_goal: "目標計算機",
+                nav_compound: "複利試算", nav_goal: "目標計算機", nav_portfolio: "實戰盤點",
                 nav_about: "關於我們", nav_edu: "存股教室",
                 intro_title: "定期定額存股模擬器",
                 intro_desc: "您可以模擬在不同配息頻率標的上，定期定額投入不同金額，以了解可能的結果，並擬定未來策略。",
@@ -282,7 +292,7 @@
                 label_rate_aria: "年化報酬率",
             },
             en: {
-                nav_compound: "DCA & DIV SIM", nav_goal: "Goal Planner",
+                nav_compound: "DCA & DIV SIM", nav_goal: "Goal Planner", nav_portfolio: "Portfolio",
                 nav_about: "About", nav_edu: "Academy",
                 intro_title: "Dollar-Cost Averaging & Dividend Simulator",
                 intro_desc: "Simulate dollar-cost averaging across various payout frequencies to understand potential outcomes and refine your strategy.",
