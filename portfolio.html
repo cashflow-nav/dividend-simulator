@@ -51,6 +51,23 @@
         #cookie-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 800px; z-index: 1000; display: none; }
         .input-clean { background: transparent; font-weight: 900; width: 100%; outline: none; border-bottom: 2px solid transparent; transition: all 0.2s; }
         .input-clean:focus { border-bottom-color: #2563eb; }
+
+
+        .drag-handle {
+    cursor: move !important;
+}
+
+.js-drag-row {
+    cursor: default;
+}
+
+
+.drag-handle:hover {
+    background-color: #f1f5f9;
+    color: #2563eb;
+    border-color: #dbeafe;
+}
+
     </style>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,7 +78,7 @@
 <body class="p-4 md:p-8">
     <div id="cookie-banner" class="glass-card p-6 border-t-4 border-t-blue-600 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xl">
         <p class="text-[10px] md:text-xs font-bold text-slate-600 i18n" data-key="cookie_text"></p>
-        <button onclick="acceptCookies()" class="bg-blue-600 text-white px-8 py-2 rounded-full text-[10px] font-black uppercase whitespace-nowrap hover:bg-blue-700 transition-colors i18n" data-key="cookie_btn"></button>
+        <button aria-label="Accept cookies and close notification" onclick="acceptCookies()" class="bg-blue-600 text-white px-8 py-2 rounded-full text-[10px] font-black uppercase whitespace-nowrap hover:bg-blue-700 transition-colors i18n" data-key="cookie_btn"></button>
     </div>
 
     <div class="max-w-7xl mx-auto">
@@ -77,28 +94,28 @@
                 <div class="flex flex-wrap justify-center md:justify-end items-center gap-2">
                     <a href="about.html" target="_blank" rel="noopener noreferrer" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600" data-key="nav_about"></a>
                     <a href="academy.html" target="_blank" rel="noopener noreferrer" class="i18n bg-white/10 hover:bg-white/20 px-3 py-1.5 md:px-5 md:py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border border-slate-200 text-slate-600" data-key="nav_edu"></a>
-                    <button onclick="toggleLang()" class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black hover:bg-blue-600 transition-all uppercase whitespace-nowrap">中文 / EN</button>
+                    <button aria-label="Switch Language Between Chinese and English" onclick="toggleLang()" class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-[10px] font-black hover:bg-blue-600 transition-all uppercase whitespace-nowrap">中文 / EN</button>
                 </div>
             </div>
 
-            <nav class="grid grid-cols-3 gap-2 p-1.5 bg-slate-100 rounded-[1.5rem] max-w-4xl mx-auto lg:mx-0">
-    <a href="index.html" class="flex items-center justify-center gap-2 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_compound">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+<nav aria-label="Main Navigation" class="grid grid-cols-3 gap-2 p-1.5 bg-slate-100 rounded-[1.5rem] max-w-4xl mx-auto lg:mx-0">
+    <a href="index.html" class="flex items-center justify-center gap-2 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" aria-labelledby="label_nav_compound">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
             <line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>
         </svg>
-        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_compound">複利試算</span>
+        <span id="label_nav_compound" class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_compound">複利試算</span>
     </a>
-    <a href="goal.html" class="flex items-center justify-center gap-2 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" data-aria-key="nav_goal">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+    <a href="goal.html" class="flex items-center justify-center gap-2 text-slate-400 hover:text-blue-600 py-4 rounded-[1.25rem] transition-all" aria-labelledby="label_nav_goal">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
         </svg>
-        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_goal">目標計算機</span>
+        <span id="label_nav_goal" class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_goal">目標計算機</span>
     </a>
-    <a href="portfolio.html" class="flex items-center justify-center gap-2 bg-white text-blue-600 py-4 rounded-[1.25rem] shadow-sm ring-1 ring-slate-200 transition-all" data-aria-key="nav_portfolio">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
+    <a href="portfolio.html" class="flex items-center justify-center gap-2 bg-white text-blue-600 py-4 rounded-[1.25rem] shadow-sm ring-1 ring-slate-200 transition-all" aria-labelledby="label_nav_portfolio">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden md:block">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
         </svg>
-        <span class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_portfolio">實戰盤點</span>
+        <span id="label_nav_portfolio" class="text-xs md:text-base font-black uppercase tracking-tight i18n" data-key="nav_portfolio">實戰盤點</span>
     </a>
 </nav>
         </header>
@@ -114,22 +131,24 @@
 
 <div class="flex justify-end -mb-8 px-2">
         <div class="glass-card px-4 py-2 flex items-center gap-3 border-blue-200 shadow-sm">
-            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest i18n" data-key="rate_label"></span>
-            <input type="number" id="exchangeRate" value="32" oninput="calculateSummary()" 
-                   class="w-16 bg-transparent font-black text-blue-600 outline-none text-right border-b border-transparent focus:border-blue-600">
-            <span class="text-[10px] font-black text-slate-400">TWD</span>
-        </div>
+    <span id="label-rate" class="text-[10px] font-black text-slate-400 uppercase tracking-widest i18n" data-key="rate_label"></span>
+    
+    <input type="number" id="exchangeRate" aria-labelledby="label-rate label-currency" value="32" oninput="calculateSummary()" 
+class="w-16 bg-transparent font-black text-blue-600 outline-none text-right border-b border-transparent focus:border-blue-600">
+    
+    <span id="label-currency" class="text-[10px] font-black text-slate-400">TWD</span>
+</div>
     </div>
 
 <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="glass-card p-6 border-t-4 border-t-blue-500 shadow-sm text-center">
         <label class="block text-base font-black text-slate-400 uppercase tracking-widest mb-2 i18n" data-key="summary_annual"></label>
-        <div class="text-2xl font-black text-slate-900"><span id="totalAnnual">0</span></div>
+        <div class="text-2xl font-black text-slate-900"><span id="totalAnnual" aria-live="polite">0</span></div>
     </div>
     
     <div class="glass-card p-6 border-t-4 border-t-indigo-500 shadow-sm text-center">
         <label class="block text-base font-black text-slate-400 uppercase tracking-widest mb-2 i18n" data-key="summary_monthly"></label>
-        <div class="text-2xl font-black text-slate-900"><span id="totalMonthly">0</span></div>
+        <div class="text-2xl font-black text-slate-900"><span id="totalMonthly" aria-live="polite">0</span></div>
     </div>
 </section>
 
@@ -137,40 +156,47 @@
     <div class="lg:col-span-2 glass-card p-6 flex flex-col items-center justify-center min-h-[350px]">
         <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 i18n" data-key="chart_source"></h3>
         <div class="relative w-full h-[300px]">
-            <canvas id="sourceChart"></canvas>
+            <canvas id="sourceChart" role="img" aria-label="Pie chart showing annual dividend distribution by stock symbol">
+    Your browser does not support the canvas element.
+</canvas>
         </div>
     </div>
     <div class="lg:col-span-1 glass-card p-6 flex flex-col items-center justify-center min-h-[350px]">
         <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 i18n" data-key="chart_currency"></h3>
         <div class="relative w-full h-[300px]">
-            <canvas id="currencyChart"></canvas>
+            <canvas id="currencyChart" role="img" aria-label="Doughnut chart showing asset allocation by currency">
+    Your browser does not support the canvas element.
+</canvas>
         </div>
     </div>
 </section>
 
             <section class="bg-white border border-slate-200 rounded-[2.5rem] p-4 md:p-8 shadow-sm overflow-hidden">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8 px-4 gap-6">
-                    <h2 class="text-sm font-black uppercase tracking-[0.2em] text-slate-800 i18n" data-key="tracker_title"></h2>
-                    <button onclick="addRow()" class="bg-blue-600 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-blue-700 transition-all">+ Add Stock</button>
-                </div>
+    <h2 class="text-sm font-black uppercase tracking-[0.2em] text-slate-800 i18n" data-key="tracker_title"></h2>
+    <button aria-label="Add new stock to list" aria-controls="portfolioBody" onclick="addRow()" class="bg-blue-600 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase hover:bg-blue-700 transition-all">+ Add Stock</button>
+</div>
 
-<div class="px-4 mb-4 text-left">
+<div class="px-4 mb-4 text-left" role="status" aria-atomic="true">
     <div class="inline-flex items-baseline gap-1 font-black">
         <span id="stockCount" class="text-orange-600 text-base">0</span>
-        
         <span class="i18n text-slate-400 text-[10px] font-bold uppercase tracking-wide" data-key="unit_stocks"></span>
     </div>
 </div>
 
                 <div class="table-container border border-slate-100">
                     <table class="w-full border-collapse">
-                        <thead class="hidden md:table-header-group">
+
+<thead class="hidden md:table-header-group">
     <tr class="bg-slate-50">
-        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_symbol"></th>
-        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_shares"></th>
-        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_div"></th>
-        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_freq"></th>
-        <th class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_total"></th>
+        <th scope="col" class="p-4 w-12 border-r border-slate-200"></th>
+
+        <th scope="col" class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_symbol"></th>
+        <th scope="col" class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_shares"></th>
+        <th scope="col" class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_div"></th>
+        <th scope="col" class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_freq"></th>
+        <th scope="col" class="p-4 text-[10px] font-black text-slate-400 border-r border-slate-200 i18n" data-key="th_total"></th>
+        
         <th class="p-4"></th>
     </tr>
 </thead>
@@ -178,9 +204,9 @@
                     </table>
                 </div>
                 <div class="mt-8 text-center">
-                    <button onclick="clearData()" class="text-[10px] font-black text-slate-300 uppercase tracking-widest hover:text-red-500 transition-colors i18n" data-key="btn_clear"></button>
-                </div>
-            </section>
+    <span id="clear-warning" class="sr-only">Warning: This will delete all your saved stock data permanently.</span>
+    <button aria-label="Clear all stored portfolio data" aria-describedby="clear-warning" onclick="clearData()" class="text-[10px] font-black text-slate-300 uppercase tracking-widest hover:text-red-500 transition-colors i18n" data-key="btn_clear"></button>
+</div>
 
             <section class="mt-24">
                 <div class="glass-card p-8 md:p-12 bg-white">
@@ -301,7 +327,7 @@
             }
         };
 
-        function applyLang() {
+function applyLang() {
             document.documentElement.lang = currentLang;
             document.querySelectorAll('.i18n').forEach(el => {
                 const key = el.getAttribute('data-key');
@@ -439,16 +465,18 @@ calculateSummary();
     } else {
         
         const createResultHTML = (usdRaw, twdRaw, totalTwd, totalUsd, label) => `
-    <div class="text-xl text-red-400 font-bold mb-2 uppercase">
-        USD ${usdRaw.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} + TWD ${Math.round(twdRaw).toLocaleString()}
-    </div>
-    <div class="flex flex-col gap-1 items-center">
-        <div class="text-base font-bold text-slate-500 uppercase tracking-widest opacity-80">${label}</div>
-        <div class="text-xl md:text-2xl font-black text-blue-600">
-           ≈ NT$ ${Math.round(totalTwd).toLocaleString()}
+    <div role="region" aria-label="Calculation Result" class="contents"> 
+        <div class="text-xl text-red-400 font-bold mb-2 uppercase">
+            USD ${usdRaw.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} + TWD ${Math.round(twdRaw).toLocaleString()}
         </div>
-        <div class="text-xl md:text-2xl font-black text-slate-900">
-           ≈ US$ ${totalUsd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+        <div class="flex flex-col gap-1 items-center">
+            <div class="text-base font-bold text-slate-500 uppercase tracking-widest opacity-80">${label}</div>
+            <div class="text-xl md:text-2xl font-black text-blue-600">
+               ≈ NT$ ${Math.round(totalTwd).toLocaleString()}
+            </div>
+            <div class="text-xl md:text-2xl font-black text-slate-900">
+               ≈ US$ ${totalUsd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
+            </div>
         </div>
     </div>
 `;
@@ -483,7 +511,7 @@ function updateCharts(totals, rate) {
     }
     chartSec.classList.remove('hidden');
 
-    // 1. 處理數據
+    // 1. 處理數據 (維持不變)
     let sourceData = stocks.map(s => ({
         label: s.symbol || 'Unknown',
         value: (s.shares * s.div * s.freq) * (s.currency === 'USD' ? rate : 1)
@@ -495,7 +523,7 @@ function updateCharts(totals, rate) {
         sourceData.push({ label: currentLang === 'zh' ? '其他' : 'Others', value: others });
     }
 
-    // 2. 定義完整的百分比顯示邏輯
+    // 2. 定義百分比邏輯 (維持不變)
     const chartPlugins = {
         legend: { position: 'bottom', labels: { boxWidth: 12, font: { weight: 'bold', size: 10 } } },
         tooltip: {
@@ -512,68 +540,78 @@ function updateCharts(totals, rate) {
     };
 
     // 3. 更新或建立 Source Chart
-    if (sourceChart) {
-        sourceChart.data.labels = sourceData.map(d => d.label);
-        sourceChart.data.datasets[0].data = sourceData.map(d => d.value);
-        sourceChart.options.plugins = chartPlugins; // 重新注入插件配置確保百分比正確
-        sourceChart.update();
-    } else {
-        const ctxSource = document.getElementById('sourceChart').getContext('2d');
-        sourceChart = new Chart(ctxSource, {
-            type: 'doughnut',
-            data: {
-                labels: sourceData.map(d => d.label),
-                datasets: [{
-                    data: sourceData.map(d => d.value),
-                    backgroundColor: ['#2563eb', '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f97316', '#eab308', '#22c55e', '#94a3b8'],
-                    borderWidth: 2,
-                    borderColor: '#ffffff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: chartPlugins,
-                cutout: '60%'
-            }
-        });
+    const canvasSource = document.getElementById('sourceChart');
+    if (canvasSource) {
+        // 補強無障礙
+        canvasSource.setAttribute('role', 'img');
+        canvasSource.setAttribute('aria-label', currentLang === 'zh' ? '持股比例圖' : 'Stock distribution chart');
+        
+        if (sourceChart) {
+            sourceChart.data.labels = sourceData.map(d => d.label);
+            sourceChart.data.datasets[0].data = sourceData.map(d => d.value);
+            sourceChart.options.plugins = chartPlugins;
+            sourceChart.update();
+        } else {
+            const ctxSource = canvasSource.getContext('2d');
+            sourceChart = new Chart(ctxSource, {
+                type: 'doughnut',
+                data: {
+                    labels: sourceData.map(d => d.label),
+                    datasets: [{
+                        data: sourceData.map(d => d.value),
+                        backgroundColor: ['#2563eb', '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f97316', '#eab308', '#22c55e', '#94a3b8'],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: chartPlugins,
+                    cutout: '60%'
+                }
+            });
+        }
     }
 
     // 4. 更新或建立 Currency Chart
-    if (currencyChart) {
-        currencyChart.data.datasets[0].data = [totals.TWD, totals.USD * rate];
-        currencyChart.options.plugins = chartPlugins;
-        currencyChart.update();
-    } else {
-        const ctxCurr = document.getElementById('currencyChart').getContext('2d');
-        currencyChart = new Chart(ctxCurr, {
-            type: 'pie',
-            data: {
-                labels: ['TWD', 'USD'],
-                datasets: [{
-                    data: [totals.TWD, totals.USD * rate],
-                    backgroundColor: ['#334155', '#2563eb'],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: chartPlugins
-            }
-        });
+    const canvasCurr = document.getElementById('currencyChart');
+    if (canvasCurr) {
+        // 補強無障礙
+        canvasCurr.setAttribute('role', 'img');
+        canvasCurr.setAttribute('aria-label', currentLang === 'zh' ? '幣別比例圖' : 'Currency distribution chart');
+        
+        if (currencyChart) {
+            currencyChart.data.datasets[0].data = [totals.TWD, totals.USD * rate];
+            currencyChart.options.plugins = chartPlugins;
+            currencyChart.update();
+        } else {
+            const ctxCurr = canvasCurr.getContext('2d');
+            currencyChart = new Chart(ctxCurr, {
+                type: 'pie',
+                data: {
+                    labels: ['TWD', 'USD'],
+                    datasets: [{
+                        data: [totals.TWD, totals.USD * rate],
+                        backgroundColor: ['#334155', '#2563eb'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: chartPlugins
+                }
+            });
+        }
     }
 }
-
         let lastRenderedData = ""; // 緩存上次渲染的字符串
 
 function renderTable() {
-    const body = document.getElementById('portfolioBody');
-    // 渲染前預處理：將 stocks 轉為簡化字符串比對，避免無意義渲染
+    const body = document.getElementById('portfolioBody');    
     const currentDataState = JSON.stringify(stocks.map(s => ({id: s.id, cur: s.currency})));
-    
-    // 如果只有數值變動（updateStock 會處理局部更新），就不需要重新 map 全表
-    // 這裡我們只在「結構性改變」（刪除、新增、切換幣別）時才全量 render
+        
     const rowsHtml = stocks.map(s => {
         const currencySymbol = s.currency === 'USD' ? 'US$' : 'NT$';
         const rowTotal = s.shares * s.div * s.freq;
@@ -582,51 +620,68 @@ function renderTable() {
             : Math.round(rowTotal).toLocaleString();
 
         return `
-        <tr class="cursor-move flex flex-col md:table-row border-2 border-slate-100 md:border-0 md:border-b md:border-slate-50 hover:bg-slate-50 transition-colors p-5 mb-6 md:mb-0 rounded-[2rem] md:rounded-none relative bg-white shadow-sm md:shadow-none">
-            <td class="md:hidden p-0 w-full flex justify-end">
-                <button onclick="removeRow(${s.id})" class="w-7 h-7 flex items-center justify-center rounded-full bg-slate-50 text-slate-400 font-bold border border-slate-100 active:scale-90 transition-all shadow-sm mb-1">✕</button>
-            </td>
+        <tr class="js-drag-row flex flex-col md:table-row border-2 border-slate-100 md:border-0 md:border-b md:border-slate-50 hover:bg-slate-50 transition-colors p-5 mb-6 md:mb-0 rounded-[2rem] md:rounded-none relative bg-white shadow-sm md:shadow-none">
+          <td class="p-0 md:p-4 w-full md:w-12 flex md:table-cell justify-between items-center mb-2 md:mb-0 md:border-r border-slate-100">
+    <div role="button" aria-label="Drag to reorder" title="Drag to reorder" class="drag-handle w-10 h-7 flex items-center justify-center rounded-lg bg-slate-50 text-slate-400 cursor-move border border-slate-100 active:bg-blue-50 hover:bg-slate-100 transition-colors md:mx-auto">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="4" y1="8" x2="20" y2="8"></line>
+        <line x1="4" y1="12" x2="20" y2="12"></line>
+        <line x1="4" y1="16" x2="20" y2="16"></line>
+    </svg>
+</div>
+    <button onclick="removeRow(${s.id})" class="md:hidden w-7 h-7 flex items-center justify-center rounded-full bg-slate-50 text-slate-400 font-bold border border-slate-100 active:scale-90 shadow-sm">✕</button>
+</td>
             <td class="p-2 md:p-4 md:border-r border-slate-100">
                 <div class="flex flex-col gap-1">
                     <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">${langData[currentLang].th_symbol}</span>
                     <div class="flex flex-row items-center gap-2 w-full">
-                        <input class="input-clean text-left text-lg md:text-xs flex-1 min-w-[80px] uppercase" value="${s.symbol}" oninput="updateStock(${s.id}, 'symbol', this.value)" placeholder="e.g. AAPL">
+                        <input aria-label="${langData[currentLang].th_symbol}" class="input-clean text-left text-lg md:text-xs flex-1 min-w-[80px] uppercase" value="${s.symbol}" oninput="updateStock(${s.id}, 'symbol', this.value)" placeholder="e.g. AAPL">
                         <div class="flex items-center bg-slate-100 p-0.5 rounded-full border border-slate-200/50 shrink-0">
-                            <button onclick="updateStock(${s.id}, 'currency', 'TWD')" class="px-2 py-0.5 rounded-full text-[9px] font-black transition-all ${(!s.currency || s.currency === 'TWD') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">TWD</button>
-                            <button onclick="updateStock(${s.id}, 'currency', 'USD')" class="px-2 py-0.5 rounded-full text-[9px] font-black transition-all ${s.currency === 'USD' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">USD</button>
+                            <button 
+    aria-pressed="${(!s.currency || s.currency === 'TWD') ? 'true' : 'false'}" 
+    onclick="updateStock(${s.id}, 'currency', 'TWD')" 
+    class="px-2 py-0.5 rounded-full text-[9px] font-black transition-all ${(!s.currency || s.currency === 'TWD') ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">
+    TWD
+</button>
+
+<button 
+    aria-pressed="${s.currency === 'USD' ? 'true' : 'false'}" 
+    onclick="updateStock(${s.id}, 'currency', 'USD')" 
+    class="px-2 py-0.5 rounded-full text-[9px] font-black transition-all ${s.currency === 'USD' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-400 hover:text-slate-600'}">
+    USD
+</button>
                         </div>
                     </div>
                 </div>
             </td>
             <td class="p-2 md:p-4 md:border-r border-slate-100">
-                <div class="flex justify-between items-center md:block">
-                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_shares}</span>
-                    <input type="number" min="0" class="input-clean text-right md:text-left max-w-[150px] md:max-w-none" value="${s.shares}" oninput="updateStock(${s.id}, 'shares', this.value)">
+                <div class="flex justify-between items-center md:block"><span id="label-shares-${s.id}" class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_shares}</span>
+                <input type="number" id="input-shares-${s.id}" min="0" class="input-clean text-base text-right md:text-right max-w-[150px] md:max-w-none" value="${s.shares}" oninput="updateStock(${s.id}, 'shares', this.value)" aria-labelledby="label-shares-${s.id}">
                 </div>
             </td>
             <td class="p-2 md:p-4 md:border-r border-slate-100">
-                <div class="flex justify-between items-center md:block">
-                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_div}</span>
-                    <input type="number" min="0" step="any" class="input-clean text-right md:text-left max-w-[150px] md:max-w-none" value="${s.div}" oninput="updateStock(${s.id}, 'div', this.value)">
-                </div>
-            </td>
+    <div class="flex justify-between items-center md:block">
+        <span id="label-div-${s.id}" class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_div}</span>
+        <input type="number" id="input-div-${s.id}" min="0" step="any" class="input-clean text-base text-right md:text-right max-w-[150px] md:max-w-none" value="${s.div}" oninput="updateStock(${s.id}, 'div', this.value)" aria-labelledby="label-div-${s.id}">
+    </div>
+</td>
             <td class="p-2 md:p-4 md:border-r border-slate-100">
-                <div class="flex justify-between items-center md:block">
-                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_freq}</span>
-                    <select onchange="updateStock(${s.id}, 'freq', this.value)" class="bg-transparent font-black text-slate-700 outline-none text-right md:text-left border-b-2 border-transparent focus:border-blue-600">
-                        <option value="1" ${s.freq == 1 ? 'selected' : ''}>1</option>
-                        <option value="2" ${s.freq == 2 ? 'selected' : ''}>2</option>
-                        <option value="4" ${s.freq == 4 ? 'selected' : ''}>4</option>
-                        <option value="12" ${s.freq == 12 ? 'selected' : ''}>12</option>
-                    </select>
-                </div>
-            </td>
-            <td id="total-${s.id}" class="p-4 md:border-r border-slate-100 font-black text-blue-600 bg-blue-50/50 md:bg-transparent rounded-2xl md:rounded-none mt-4 md:mt-0">
-                <div class="flex justify-between items-center md:block">
-                    <span class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">${langData[currentLang].th_total}</span>
-                    <span class="text-base md:text-xs">${currencySymbol}${displayTotal}</span>
-                </div>
-            </td>
+    <div class="flex justify-between items-center md:block text-center">
+        <span id="label-freq-${s.id}" class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-widest">${langData[currentLang].th_freq}</span>
+        <select id="select-freq-${s.id}" onchange="updateStock(${s.id}, 'freq', this.value)" aria-labelledby="label-freq-${s.id}" class="bg-transparent font-black text-slate-700 outline-none text-right md:text-right border-b-2 border-transparent focus:border-blue-600">
+            <option value="1" ${s.freq == 1 ? 'selected' : ''}>1</option>
+            <option value="2" ${s.freq == 2 ? 'selected' : ''}>2</option>
+            <option value="4" ${s.freq == 4 ? 'selected' : ''}>4</option>
+            <option value="12" ${s.freq == 12 ? 'selected' : ''}>12</option>
+        </select>
+    </div>
+</td>
+            <td id="total-${s.id}" aria-live="polite" class="p-4 md:border-r border-slate-100 font-black text-blue-600 bg-blue-50/50 md:bg-transparent rounded-2xl md:rounded-none mt-4 md:mt-0">
+    <div class="flex justify-between items-center md:block md:text-right">
+        <span id="label-total-${s.id}" class="md:hidden text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">${langData[currentLang].th_total}</span>
+        <span aria-labelledby="label-total-${s.id}" class="text-base md:text-xs">${currencySymbol}${displayTotal}</span>
+    </div>
+</td>
             <td class="hidden md:table-cell p-4 text-center">
                 <button onclick="removeRow(${s.id})" class="text-slate-300 hover:text-red-500 font-bold transition-colors">✕</button>
             </td>
@@ -657,10 +712,10 @@ function renderTable() {
             localStorage.setItem('cookieAccepted', 'true');
         }
 
-        window.onload = function() {
+window.onload = function() {
     if (!localStorage.getItem('cookieAccepted')) document.getElementById('cookie-banner').style.display = 'flex';
     
-    // ... (語言判斷邏輯保持不變) ...
+    
     const urlParams = new URLSearchParams(window.location.search);
     const langParam = urlParams.get('lang');
     if (langParam && (langParam === 'zh' || langParam === 'en')) {
@@ -678,33 +733,33 @@ function renderTable() {
 
     if (stocks.length === 0) addRow();
 
-    // --- 新增拖拽初始化 ---
+    
     const el = document.getElementById('portfolioBody');
+    
+    
     if (el) {
         Sortable.create(el, {
-            animation: 150, // 拖拽時的動畫速度 (ms)
-            ghostClass: 'bg-blue-50', // 拖動時原本位置的樣式
+            animation: 150,
+            // 關鍵修改：利用 CSS 媒體查詢配合 handle 選擇器
+            // 電腦版時 .js-drag-row 具備拖曳功能；手機版時則只有 .drag-handle 具備
+            handle: '.drag-handle',
+            ghostClass: 'bg-blue-50',
             onEnd: function () {
-                // 當拖拽結束時，重新對齊記憶體中的 stocks 順序
                 const newOrderIds = Array.from(el.querySelectorAll('tr')).map(tr => {
-                    // 我們需要從 id="total-123" 這種格式中提取出純數字 ID
                     const totalId = tr.querySelector('[id^="total-"]').id;
                     return parseInt(totalId.replace('total-', ''));
                 });
-
-                // 根據 DOM 的新順序重排 stocks 陣列
                 stocks = newOrderIds.map(id => stocks.find(s => s.id === id));
-
-                // 存檔並更新圖表 (不重繪表格，避免閃爍)
                 localStorage.setItem('userPortfolio', JSON.stringify(stocks));
                 calculateSummary(); 
             },
         });
     }
 
+    
     applyLang();
     calculateSummary();
-};
+}; 
     </script>
 </body>
 </html>
