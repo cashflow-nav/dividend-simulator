@@ -34,6 +34,7 @@
     
     <link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/portfolio.html?lang=zh" />
     <link rel="alternate" hreflang="en" href="https://dcadivsim.com/portfolio.html?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/portfolio.html" />
 
     <style>
                 
@@ -252,6 +253,8 @@ class="w-16 bg-transparent font-black text-blue-600 outline-none text-right bord
 
         const langData = {
             zh: {
+                seo_title: "DCA & Dividend Simulator - 實戰資產盤點 / 股息領取清單",
+                seo_desc: "最直覺的資產盤點工具，精確計算持股總額與預估年領股利。",                
                 nav_compound: "複利試算", nav_goal: "目標計算機", nav_portfolio: "實戰盤點",
                 nav_about: "關於我們", nav_edu: "存股教室",
                 intro_title: "實戰資產盤點工具",
@@ -289,7 +292,9 @@ class="w-16 bg-transparent font-black text-blue-600 outline-none text-right bord
                 chart_currency: "幣別配置佔比",
             },
             en: {
-                nav_compound: "DCA & DIV SIM", nav_goal: "Goal Planner", nav_portfolio: "Portfolio",
+                seo_title: "DCA & Dividend Simulator - Portfolio Tracker",
+                seo_desc: "Professional Portfolio Tracker. Manage your holdings and track annual dividends.",                
+                nav_compound: "Compounding Calc", nav_goal: "Goal Planner", nav_portfolio: "Portfolio",
                 nav_about: "About", nav_edu: "Academy",
                 intro_title: "Portfolio Tracker",
                 intro_desc: "Keep track of your holdings and dividends. Data is stored locally in your browser for your privacy and convenience. You can reorder the table at any time by dragging rows to keep your portfolio organized.",
@@ -328,25 +333,39 @@ class="w-16 bg-transparent font-black text-blue-600 outline-none text-right bord
         };
 
 function applyLang() {
-            document.documentElement.lang = currentLang;
-            document.querySelectorAll('.i18n').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (key && langData[currentLang][key]) el.innerText = langData[currentLang][key];
-                
-                const ariaKey = el.getAttribute('data-aria-key');
-                if (ariaKey && langData[currentLang][ariaKey]) el.setAttribute('aria-label', langData[currentLang][ariaKey]);
-            });
+    const data = langData[currentLang];
+    // 1. 設定標準 HTML lang 標籤
+    document.documentElement.lang = currentLang === 'zh' ? 'zh-Hant' : 'en';
 
-            document.querySelectorAll('nav a, footer a').forEach(link => {
-                const hrefAttr = link.getAttribute('href');
-                if (hrefAttr) {
-                    const baseHref = hrefAttr.split('?')[0];
-                    link.setAttribute('href', `${baseHref}?lang=${currentLang}`);
-                }
-            });
-            document.getElementById('logicContent').innerHTML = langData[currentLang].logic_html;
-            renderTable();
+    // 2. 更新 SEO Title 與 Description (這是關鍵)
+    if (data.seo_title) document.title = data.seo_title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && data.seo_desc) metaDesc.setAttribute('content', data.seo_desc);
+
+    // 3. 遍歷所有 .i18n 元素更新內容
+    document.querySelectorAll('.i18n').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (key && data[key]) el.innerText = data[key];
+        
+        const ariaKey = el.getAttribute('data-aria-key');
+        if (ariaKey && data[ariaKey]) el.setAttribute('aria-label', data[ariaKey]);
+    });
+
+    // 4. 更新導覽與頁尾連結，確保點擊後維持當前語系 (排除信箱連結)
+    document.querySelectorAll('nav a, footer a').forEach(link => {
+        const hrefAttr = link.getAttribute('href');
+        if (hrefAttr && !hrefAttr.startsWith('mailto:')) {
+            const baseHref = hrefAttr.split('?')[0];
+            link.setAttribute('href', `${baseHref}?lang=${currentLang}`);
         }
+    });
+
+    // 5. 更新邏輯說明區塊與重繪表格
+    const logicEl = document.getElementById('logicContent');
+    if (logicEl) logicEl.innerHTML = data.logic_html;
+    
+    renderTable();
+}
 
         function toggleLang() {
             currentLang = currentLang === 'zh' ? 'en' : 'zh';

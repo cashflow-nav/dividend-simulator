@@ -34,6 +34,7 @@
     
     <link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/goal.html?lang=zh" />
     <link rel="alternate" hreflang="en" href="https://dcadivsim.com/goal.html?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/goal.html" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
@@ -194,6 +195,8 @@
 
         const langData = {
             zh: {
+                seo_title: "DCA & Dividend Simulator - 定期定額財富達標計算機 / 計時器",
+                seo_desc: "最專業的存股目標計算機，精確反推達成財富自由的倒數時間。",                
                 nav_compound: "複利試算", nav_goal: "目標計算機", nav_portfolio: "實戰盤點",
                 nav_about: "關於我們", nav_edu: "存股教室",
                 intro_title: "財富達標計時器",
@@ -228,7 +231,9 @@
                 btn_range_3: "切換金額範圍 10萬至20萬"
             },
             en: {
-                nav_compound: "DCA & DIV SIM", nav_goal: "Goal Planner", nav_portfolio: "Portfolio",
+                seo_title: "DCA & Dividend Simulator - Goal Planner",
+                seo_desc: "Professional Investment Goal Calculator (Goal Planner). Calculate how many years it takes to reach your wealth target.",                
+                nav_compound: "Compounding Calc", nav_goal: "Goal Planner", nav_portfolio: "Portfolio",
                 nav_about: "About", nav_edu: "Academy",
                 intro_title: "Target Achievement Timer",
                 intro_desc: "Enter your wealth target and initial capital to see the years required. The matrix below visualizes your lifecycle milestones across various investment scenarios.",
@@ -305,26 +310,42 @@
             document.getElementById('logicContent').innerHTML = langData[currentLang].logic_html;
         }
 
-        function applyLang() {
+function applyLang() {
+    // 1. 設定 HTML 語系屬性 (利於瀏覽器判斷)
     document.documentElement.lang = currentLang;
+
+    // --- 【新增：SEO 動態切換邏輯】 ---
+    // 2. 動態更新分頁標題 (Google 搜尋結果會顯示這個)
+    if (langData[currentLang].seo_title) {
+        document.title = langData[currentLang].seo_title;
+    }
+
+    // 3. 動態更新 Meta Description (Google 搜尋摘要會顯示這個)
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && langData[currentLang].seo_desc) {
+        metaDesc.setAttribute('content', langData[currentLang].seo_desc);
+    }
+    // ------------------------------
+
+    // 4. 處理頁面 .i18n 元素的文字翻譯
     document.querySelectorAll('.i18n').forEach(el => {
-        // 1. 處理一般文字翻譯
         const key = el.getAttribute('data-key');
         if (key && langData[currentLang][key]) el.innerText = langData[currentLang][key];
 
-        // 2. 處理 Accessibility (aria-label) 翻譯，這是跑分關鍵
+        // 處理 Accessibility (aria-label) 翻譯
         const ariaKey = el.getAttribute('data-aria-key');
         if (ariaKey && langData[currentLang][ariaKey]) {
             el.setAttribute('aria-label', langData[currentLang][ariaKey]);
         }
     });
 
-    // 更新導覽列連結，確保跳轉時語系不丟失
+    // 5. 更新導覽列連結，確保跳轉時語系不丟失
     document.querySelectorAll('nav a').forEach(link => {
         const href = link.getAttribute('href').split('?')[0];
         link.setAttribute('href', `${href}?lang=${currentLang}`);
     });
 
+    // 6. 重新渲染目標計算機的矩陣與說明文案
     renderMatrix();
     renderLogic();
 }

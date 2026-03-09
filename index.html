@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <title>DCA & Dividend Simulator - 定期定額存股計算機 / 模擬器</title>
-    <meta name="description" content="Professional DCA & Dividend Calculator (Simulator). Support Monthly, Quarterly, and Annual payouts. 最直觀的定期定額存股計算機與模擬試算工具，幫助您規劃長期複利資產與現金流地圖。">
+    <meta name="description" content="Professional DCA, Dividend, and Compounding Simulator. Supports Monthly, Quarterly, and Annual payouts to help you plan your long-term wealth. 最直觀的定期定額存股計算機與模擬試算工具，幫助您規劃長期複利資產與現金流地圖。">
     <meta name="keywords" content="存股計算機, Dividend Calculator, 定期定額計算機, DCA Simulator, 複利, 存股, 理財工具, 投資模擬器">
     
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -35,6 +35,7 @@
     
     <link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/?lang=zh" />
     <link rel="alternate" hreflang="en" href="https://dcadivsim.com/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <style>
@@ -247,6 +248,8 @@
         let currentLang = 'en';
         const langData = {
             zh: {
+                seo_title: "DCA & Dividend Simulator - 定期定額存股計算機 / 模擬器",
+                seo_desc: "最直觀的定期定額存股計算機與模擬試算工具，幫助您規劃長期複利資產與現金流地圖。",
                 nav_compound: "複利試算", nav_goal: "目標計算機", nav_portfolio: "實戰盤點",
                 nav_about: "關於我們", nav_edu: "存股教室",
                 intro_title: "定期定額存股模擬器",
@@ -292,7 +295,9 @@
                 label_rate_aria: "年化報酬率",
             },
             en: {
-                nav_compound: "DCA & DIV SIM", nav_goal: "Goal Planner", nav_portfolio: "Portfolio",
+                seo_title: "DCA & Dividend Simulator - Compounding Calculator",
+                seo_desc: "Professional DCA, Dividend, and Compounding Simulator. Supports Monthly, Quarterly, and Annual payouts to help you plan your long-term wealth.",
+                nav_compound: "Compounding Calc", nav_goal: "Goal Planner", nav_portfolio: "Portfolio",
                 nav_about: "About", nav_edu: "Academy",
                 intro_title: "Dollar-Cost Averaging & Dividend Simulator",
                 intro_desc: "Simulate dollar-cost averaging across various payout frequencies to understand potential outcomes and refine your strategy.",
@@ -346,31 +351,40 @@
             applyLang();
         }
 
-        function applyLang() {
-            document.documentElement.lang = currentLang;
-            document.querySelectorAll('.i18n').forEach(el => {
-                const key = el.getAttribute('data-key');
-                const ariaKey = el.getAttribute('data-aria-key'); 
-                
-                if (key && langData[currentLang][key]) {
-                    el.innerText = langData[currentLang][key];
-                }
-                
-                if (ariaKey && langData[currentLang][ariaKey]) { 
-                    el.setAttribute('aria-label', langData[currentLang][ariaKey]);
-                }
-            });
+function applyLang() {
+    document.documentElement.lang = currentLang;
 
-            // 更新導覽列連結，確保跳轉時語系不丟失
-            document.querySelectorAll('nav a').forEach(link => {
-                const href = link.getAttribute('href').split('?')[0];
-                link.setAttribute('href', `${href}?lang=${currentLang}`);
-            });
+    // --- 新增：僅更新搜尋引擎 SEO 標籤 (Google 爬蟲會讀取) ---
+    document.title = langData[currentLang].seo_title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+        metaDesc.setAttribute('content', langData[currentLang].seo_desc);
+    }
+    // -----------------------------------------------------
 
-            document.getElementById('sliderSub').innerText = langData[currentLang].slider_sub;
-            document.getElementById('logicGrid').innerHTML = langData[currentLang].logic_html;
-            run();
+    document.querySelectorAll('.i18n').forEach(el => {
+        const key = el.getAttribute('data-key');
+        const ariaKey = el.getAttribute('data-aria-key'); 
+        
+        if (key && langData[currentLang][key]) {
+            el.innerText = langData[currentLang][key];
         }
+        
+        if (ariaKey && langData[currentLang][ariaKey]) { 
+            el.setAttribute('aria-label', langData[currentLang][ariaKey]);
+        }
+    });
+
+    // 更新導覽列連結
+    document.querySelectorAll('nav a').forEach(link => {
+        const href = link.getAttribute('href').split('?')[0];
+        link.setAttribute('href', `${href}?lang=${currentLang}`);
+    });
+
+    document.getElementById('sliderSub').innerText = langData[currentLang].slider_sub;
+    document.getElementById('logicGrid').innerHTML = langData[currentLang].logic_html;
+    run();
+}
 
         function acceptCookies() {
             document.getElementById('cookie-banner').style.display = 'none';
