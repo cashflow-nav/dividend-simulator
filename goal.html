@@ -141,6 +141,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8 px-4 gap-6">
                     <h2 class="text-sm font-black uppercase tracking-[0.2em] text-slate-800 i18n" data-key="matrix_title"></h2>
                     <div class="flex bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+    <button onclick="changeRange(50, 1000, 50)" class="i18n px-4 py-2 text-[10px] font-black rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase" data-aria-key="btn_range_0">50-1k</button>
     <button onclick="changeRange(1000, 20000, 1000)" class="i18n px-4 py-2 text-[10px] font-black rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase" data-aria-key="btn_range_1">1k-20k</button>
     <button onclick="changeRange(20000, 100000, 5000)" class="i18n px-4 py-2 text-[10px] font-black rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase" data-aria-key="btn_range_2">20k-100k</button>
     <button onclick="changeRange(100000, 200000, 10000)" class="i18n px-4 py-2 text-[10px] font-black rounded-lg hover:bg-white hover:shadow-sm transition-all uppercase" data-aria-key="btn_range_3">100k-200k</button>
@@ -191,7 +192,7 @@
 
     <script>
         let currentLang = 'en'; 
-        let currentMin = 1000, currentMax = 20000, currentStep = 1000;
+        let currentMin = 50, currentMax = 1000, currentStep = 50;
 
         const langData = {
             zh: {
@@ -226,6 +227,7 @@
                 disclaimer: "免責聲明：本模擬結果僅供參考，不代表未來獲利保證。投資必有風險，請諮詢專業顧問。 © 2026 CASHFLOW NAVIGATION LAB.",
                 cookie_text: "本網站使用 Cookie 以提升用戶體驗與分析流量。點擊「同意」代表您接受我們的隱私權條款。",
                 cookie_btn: "同意並關閉",
+                btn_range_0: "切換金額範圍 50至1千",
                 btn_range_1: "切換金額範圍 1千至2萬",
                 btn_range_2: "切換金額範圍 2萬至10萬",
                 btn_range_3: "切換金額範圍 10萬至20萬"
@@ -262,6 +264,7 @@
                 disclaimer: "Disclaimer: This simulation is for reference only and does not guarantee future profits. Investing involves risk. © 2026 CASHFLOW NAVIGATION LAB.",
                 cookie_text: "We use cookies to improve experience. By continuing, you agree to our policies.",
                 cookie_btn: "Accept & Close",
+                btn_range_0: "Switch range to 50-1k",
                 btn_range_1: "Switch range to 1k-20k",
                 btn_range_2: "Switch range to 20k-100k",
                 btn_range_3: "Switch range to 100k-200k"
@@ -290,13 +293,20 @@
             const fragment = document.createDocumentFragment();
             for (let p = currentMin; p <= currentMax; p += currentStep) {
                 const tr = document.createElement('tr');
+                // 保持既有風格：底線、Hover 效果
                 tr.className = "border-b border-slate-50 hover:bg-blue-50/50 transition-colors";
+                
+                // 保持既有風格：第一欄灰底、黑字、小字體
                 let rowHtml = `<td class="p-3 font-black text-slate-500 bg-slate-50 border-r border-slate-200 text-[10px]">$${p.toLocaleString()}</td>`;
+                
                 rates.forEach(r => {
                     const rM = r / 12;
+                    // 計算達成目標所需的總月數
                     let n = (rM > 0) ? Math.log((target * rM + p) / (pv * rM + p)) / Math.log(1 + rM) : (target - pv) / p;
                     const years = Math.max(0, n / 12);
                     const fAge = Math.round(age + years);
+                    
+                    // 保持既有風格：格內佈局、粗體年分、灰色括號歲數
                     rowHtml += `<td class="p-3 border-r border-slate-50 grid-cell"><div class="font-bold text-slate-800">${years.toFixed(1)}${langData[currentLang].unit_y}</div><div class="text-[9px] text-slate-400 font-medium">(${fAge}${langData[currentLang].unit_age})</div></td>`;
                 });
                 tr.innerHTML = rowHtml;
