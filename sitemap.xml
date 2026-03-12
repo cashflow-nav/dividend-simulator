@@ -1,29 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-   <url>
-      <loc>https://dcadivsim.com/</loc>
-      <lastmod>2026-03-06</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>1.0</priority>
-   </url>
-   <url>
-      <loc>https://dcadivsim.com/portfolio.html</loc>
-      <lastmod>2026-03-06</lastmod>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://dcadivsim.com/goal.html</loc>
-      <lastmod>2026-03-06</lastmod>
-      <priority>0.9</priority>
-   </url>
-   <url>
-      <loc>https://dcadivsim.com/academy.html</loc>
-      <lastmod>2026-03-06</lastmod>
-      <priority>0.8</priority>
-   </url>
-   <url><loc>https://dcadivsim.com/lesson1.html</loc><priority>0.7</priority></url>
-   <url><loc>https://dcadivsim.com/lesson2.html</loc><priority>0.7</priority></url>
-   <url><loc>https://dcadivsim.com/lesson3.html</loc><priority>0.7</priority></url>
-   <url><loc>https://dcadivsim.com/lesson4.html</loc><priority>0.7</priority></url>
-   <url><loc>https://dcadivsim.com/lesson5.html</loc><priority>0.7</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://dcadivsim.com/index.html?lang=zh</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/index.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dcadivsim.com/index.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/index.html"/>
+    <lastmod>2026-03-06</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dcadivsim.com/index.html?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dcadivsim.com/index.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/index.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/index.html"/>
+    <lastmod>2026-03-06</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://dcadivsim.com/portfolio.html?lang=zh</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/portfolio.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dcadivsim.com/portfolio.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/portfolio.html"/>
+    <lastmod>2026-03-06</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://dcadivsim.com/portfolio.html?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dcadivsim.com/portfolio.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/portfolio.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/portfolio.html"/>
+    <lastmod>2026-03-06</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://dcadivsim.com/goal.html?lang=zh</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/goal.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dcadivsim.com/goal.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/goal.html"/>
+    <lastmod>2026-03-06</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://dcadivsim.com/goal.html?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://dcadivsim.com/goal.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://dcadivsim.com/goal.html?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dcadivsim.com/goal.html"/>
+    <lastmod>2026-03-06</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://dcadivsim.com/academy.html</loc>
+    <lastmod>2026-03-06</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url><loc>https://dcadivsim.com/lesson1.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dcadivsim.com/lesson2.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dcadivsim.com/lesson3.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dcadivsim.com/lesson4.html</loc><priority>0.7</priority></url>
+  <url><loc>https://dcadivsim.com/lesson5.html</loc><priority>0.7</priority></url>
+
 </urlset>
